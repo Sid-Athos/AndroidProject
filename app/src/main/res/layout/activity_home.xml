@@ -9,8 +9,27 @@
     <Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:elevation="10dp"
         android:background="@color/primary"
-        android:elevation="10dp">
+        android:title="@string/home_title"
+        android:titleTextColor="@color/white">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="30dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/like"
+                android:contentDescription="@string/home_like_button"
+                android:layout_marginEnd="30dp"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/whishlist"
+                android:contentDescription="@string/home_like_button" />
+        </LinearLayout>
     </Toolbar>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
