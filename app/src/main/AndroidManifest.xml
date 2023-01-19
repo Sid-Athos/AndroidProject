@@ -26,6 +26,14 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <activity
+            android:name=".LikesActivity"
+            android:theme="@style/Theme.AndroidProject.NoActionBar">
+        </activity>
+        <activity
+            android:name=".WishlistActivity"
+            android:theme="@style/Theme.AndroidProject.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

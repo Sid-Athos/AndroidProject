@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">Savg</string>
     <string name="home_title">Home</string>
-    <string name="home_like_button">Like button</string>
+
+    <string name="like_button">Like button</string>
+    <string name="wishlist_button">Like button</string>
+    <string name="close_button">Close button</string>
+
+    <string name="likes_title">Likes</string>
+    <string name="wishlist_title">My wishlist</string>
 </resources>

@@ -26,16 +26,18 @@
             android:layout_gravity="end"
             android:layout_marginEnd="20dp">
             <ImageView
+                android:id="@+id/likesButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/like"
-                android:contentDescription="@string/home_like_button"
+                android:contentDescription="@string/like_button"
                 android:layout_marginEnd="30dp"/>
             <ImageView
+                android:id="@+id/wishlistButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/whishlist"
-                android:contentDescription="@string/home_like_button" />
+                android:src="@drawable/wishlist"
+                android:contentDescription="@string/wishlist_button" />
         </LinearLayout>
     </Toolbar>
 
