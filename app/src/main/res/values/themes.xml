@@ -4,10 +4,12 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryVariant">@color/primary_light</item>
+        <item name="colorPrimaryDark">@color/primary</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/accent</item>
     </style>
     <style name="Theme.AndroidProject.NoActionBar">
+        <item name="colorPrimaryDark">@color/primary</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
