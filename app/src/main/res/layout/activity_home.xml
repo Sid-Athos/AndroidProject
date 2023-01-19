@@ -10,14 +10,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="10dp"
-        android:background="@color/primary"
-        android:title="@string/home_title"
-        android:titleTextColor="@color/white">
+        android:background="@color/primary">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/home_title"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:fontFamily="@font/google_sans"
+            android:textFontWeight="700"/>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_marginEnd="30dp">
+            android:layout_marginEnd="20dp">
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
