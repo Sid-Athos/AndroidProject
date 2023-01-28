@@ -9,23 +9,68 @@
     android:background="@color/primary"
     android:padding="25dp"
 >
-    <Button
-        android:id="@+id/registerButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="10dp"
-        android:text="@string/auth_register_button"
-        android:backgroundTint="@color/white"
-        android:textColor="@color/primary"
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:text="Bienvenue !"
     />
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:text="Veuillez vous connecter ou créer un compte pour utiliser à l'application."
+    />
+
+    <EditText
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/auth_field_email"
+            android:backgroundTint="@color/white"
+            android:textColorHint="@color/gray"
+            android:textColor="@color/white"
+            android:autofillHints="emailAddress"
+            android:inputType="textEmailAddress"
+    />
+
+    <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/auth_field_password"
+            android:backgroundTint="@color/white"
+            android:textColorHint="@color/gray"
+            android:textColor="@color/white"
+            android:autofillHints="password"
+            android:inputType="textPassword"
+    />
+
     <Button
-        android:id="@+id/loginButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:elevation="10dp"
-        android:text="@string/auth_login_button"
-        android:layout_marginTop="15dp"
-        android:backgroundTint="@color/white"
-        android:textColor="@color/primary"
+            android:id="@+id/loginButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/primary"
+            android:text="@string/auth_login_button"
+    />
+
+    <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+    />
+
+    <Button
+            android:id="@+id/registerButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:elevation="10dp"
+            android:text="@string/auth_register_button"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/primary"
     />
 </LinearLayout>
