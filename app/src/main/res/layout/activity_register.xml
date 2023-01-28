@@ -6,15 +6,15 @@
     android:layout_height="match_parent"
     android:gravity="center_vertical"
     android:orientation="vertical"
-    android:padding="25dp"
-    tools:context=".LoginActivity"
+    android:padding="16dp"
+    tools:context=".RegisterActivity"
     android:background="@color/primary"
 >
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Register new account"
         android:textColor="@android:color/white"
-        android:text="Account login"
     />
 
     <EditText
@@ -39,12 +39,12 @@
     />
 
     <Button
-        android:id="@+id/login"
+        android:id="@+id/register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="Register"
         android:backgroundTint="@color/white"
         android:textColor="@color/primary"
-        android:text="Login"
         android:layout_marginTop="20dp"
     />
 

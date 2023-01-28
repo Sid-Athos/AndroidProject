@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         initLoginButtonBehavior()
+        initRegisterButtonBehavior()
     }
 
     private fun initLoginButtonBehavior() {
@@ -23,6 +24,14 @@ class MainActivity : AppCompatActivity() {
         loginButton.setOnClickListener{
             val loginActivity = Intent(this, LoginActivity::class.java)
             startActivity(loginActivity)
+        }
+    }
+
+    private fun initRegisterButtonBehavior() {
+        val registerButton: Button = findViewById(R.id.registerButton)
+        registerButton.setOnClickListener{
+            val registerActivity = Intent(this, RegisterActivity::class.java)
+            startActivity(registerActivity)
         }
     }
 }
