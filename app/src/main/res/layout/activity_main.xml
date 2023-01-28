@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="10dp"
-        android:text="Register"
+        android:text="@string/auth_register_button"
         android:backgroundTint="@color/white"
         android:textColor="@color/primary"
     />
@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="10dp"
-        android:text="Login"
+        android:text="@string/auth_login_button"
         android:layout_marginTop="15dp"
         android:backgroundTint="@color/white"
         android:textColor="@color/primary"

@@ -13,7 +13,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Register new account"
+        android:text="@string/register_title"
         android:textColor="@android:color/white"
     />
 
@@ -21,28 +21,31 @@
         android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email"
+        android:hint="@string/auth_field_email"
         android:backgroundTint="@color/white"
         android:textColorHint="@color/gray"
         android:textColor="@color/white"
+        android:autofillHints="emailAddress"
+        android:inputType="textEmailAddress"
     />
 
     <EditText
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Password"
-        android:inputType="textPassword"
+        android:hint="@string/auth_field_password"
         android:backgroundTint="@color/white"
         android:textColorHint="@color/gray"
         android:textColor="@color/white"
+        android:importantForAutofill="no"
+        android:inputType="textPassword"
     />
 
     <Button
         android:id="@+id/register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Register"
+        android:text="@string/auth_register_button"
         android:backgroundTint="@color/white"
         android:textColor="@color/primary"
         android:layout_marginTop="20dp"

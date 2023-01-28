@@ -9,6 +9,12 @@
     <string name="likes_title">Likes</string>
     <string name="wishlist_title">My wishlist</string>
 
+    <string name="auth_login_button">Login</string>
+    <string name="auth_register_button">Register</string>
+
+    <string name="auth_field_email">Email</string>
+    <string name="auth_field_password">Password</string>
+
     <string name="auth_no_email">Please enter email…</string>
     <string name="auth_no_password">Please enter password!</string>
 
@@ -17,4 +23,7 @@
 
     <string name="register_successful">Registration successful!</string>
     <string name="register_failed">Registration failed! Please try again later</string>
+
+    <string name="login_title">Account login</string>
+    <string name="register_title">Register new account</string>
 </resources>

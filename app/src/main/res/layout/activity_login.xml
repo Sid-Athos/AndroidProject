@@ -14,28 +14,31 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@android:color/white"
-        android:text="Account login"
+        android:text="@string/login_title"
     />
 
     <EditText
         android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email"
+        android:hint="@string/auth_field_email"
         android:backgroundTint="@color/white"
         android:textColorHint="@color/gray"
         android:textColor="@color/white"
+        android:autofillHints="emailAddress"
+        android:inputType="textEmailAddress"
     />
 
     <EditText
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Password"
-        android:inputType="textPassword"
+        android:hint="@string/auth_field_password"
         android:backgroundTint="@color/white"
         android:textColorHint="@color/gray"
         android:textColor="@color/white"
+        android:autofillHints="password"
+        android:inputType="textPassword"
     />
 
     <Button
@@ -44,7 +47,7 @@
         android:layout_height="wrap_content"
         android:backgroundTint="@color/white"
         android:textColor="@color/primary"
-        android:text="Login"
+        android:text="@string/auth_login_button"
         android:layout_marginTop="20dp"
     />
 
