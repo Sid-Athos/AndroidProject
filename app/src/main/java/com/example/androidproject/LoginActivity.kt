@@ -34,11 +34,11 @@ class LoginActivity : AppCompatActivity() {
         val password = passwordTV.text.toString()
 
         if (email.isEmpty()) {
-            Toast.makeText(applicationContext, "Please enter email...", Toast.LENGTH_LONG).show()
+            Toast.makeText(applicationContext, getString(R.string.auth_no_email), Toast.LENGTH_LONG).show()
             return
         }
         if (password.isEmpty()) {
-            Toast.makeText(applicationContext, "Please enter password!", Toast.LENGTH_LONG).show()
+            Toast.makeText(applicationContext, getString(R.string.auth_no_password), Toast.LENGTH_LONG).show()
             return
         }
 
@@ -47,13 +47,13 @@ class LoginActivity : AppCompatActivity() {
         mAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    Toast.makeText(applicationContext, "Login successful!", Toast.LENGTH_LONG).show()
+                    Toast.makeText(applicationContext, getString(R.string.login_successful), Toast.LENGTH_LONG).show()
                     progressBar.visibility = View.GONE
 
                     val intent = Intent(this@LoginActivity, HomeActivity::class.java)
                     startActivity(intent)
                 } else {
-                    Toast.makeText(applicationContext, "Login failed! Please try again later", Toast.LENGTH_LONG).show()
+                    Toast.makeText(applicationContext, getString(R.string.login_failed), Toast.LENGTH_LONG).show()
                     progressBar.visibility = View.GONE
                 }
             }
