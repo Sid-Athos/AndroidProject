@@ -1,0 +1,59 @@
+<resources>
+    <string name="app_name">Savg</string>
+
+    // Home page
+    <string name="home_title">Accueil</string>
+
+    <string name="like_button">Bouton like</string>
+    <string name="wishlist_button">Bouton souhait</string>
+    <string name="close_button">Bouton fermer</string>
+
+    <string name="likes_title">Likes</string>
+    <string name="wishlist_title">Mes souhaits</string>
+
+    // Login page
+    <string name="login_title">Bienvenue !</string>
+    <string name="login_text">Veuillez vous connecter ou créer un compte pour utiliser à l\'application.</string>
+
+    <string name="login_button">Se connecter</string>
+    <string name="login_register_button">Créer un nouveau compte</string>
+
+    <string name="login_successful">Connexion réussie!</string>
+    <string name="login_failed">Échec de la connexion! Veuillez réessayer plus tard</string>
+
+    <string name="forgot_password"><u>Mot de passe oublié</u></string>
+
+    // Register page
+    <string name="register_title">Inscription</string>
+    <string name="register_text">Veuillez saisir ces différentes informations, afin que vos listes soient sauvegardées.</string>
+
+    <string name="register_button">S’inscrire</string>
+
+    <string name="register_successful">Inscription réussie!</string>
+    <string name="register_failed">L\'inscription à échoué! Essayer plus tard</string>
+
+    // Forgot password page
+    <string name="forgot_password_title">Mot de passe oublié</string>
+    <string name="forgot_password_text">Veuillez saisir votre email afin de réinitialiser votre mot de passe</string>
+
+    <string name="forgot_password_button">Renvoyer mon mot de passe</string>
+
+    <string name="forgot_password_successful">Un email vous a été envoyé pour réinitialiser votre mot de passe</string>
+    <string name="forgot_password_failed">Une erreur s\'est produite lors de la tentative de réinitialisation de votre mot de passe. Veuillez réessayer plus tard</string>
+
+    // Auth related
+    <string name="auth_field_username">Nom d’utilisateur</string>
+    <string name="auth_field_email">E-mail</string>
+    <string name="auth_field_password">Mot de passe</string>
+    <string name="auth_field_password_confirm">Vérification du mot de passe</string>
+
+    <string name="auth_no_username">Entre un nom d\'utilisateur!</string>
+    <string name="auth_no_email">Entrez un E-mail!</string>
+    <string name="auth_no_password">Entrez un mot de passe!</string>
+
+    <string name="auth_bad_email">Entrez une adresse email valide</string>
+    <string name="auth_bad_password">Le mot de passe doit contenir au moins 6 caractères</string>
+
+    <string name="auth_passwords_not_matching">Les mots de passe ne correspondent pas</string>
+
+</resources>
