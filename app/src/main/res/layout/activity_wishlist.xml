@@ -6,13 +6,18 @@
         android:layout_height="match_parent"
         android:background="@color/primary"
 >
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
     <Toolbar
-        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:elevation="10dp"
         android:background="@color/primary" android:id="@+id/toolbar3" app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-    >
+        android:layout_width="match_parent"
+        >
         <ImageView
             android:id="@+id/backButton"
             android:layout_width="wrap_content"
@@ -29,5 +34,12 @@
             android:fontFamily="@font/google_sans"
             android:textFontWeight="700"/>
     </Toolbar>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/gameListRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

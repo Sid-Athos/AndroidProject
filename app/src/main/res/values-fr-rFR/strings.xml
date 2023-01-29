@@ -56,4 +56,8 @@
 
     <string name="auth_passwords_not_matching">Les mots de passe ne correspondent pas</string>
 
+    // Lists related
+    <string name="more_info">En savoir plus</string>
+    <string name="game_price"><u>Prix : %1$d €</u></string>
+
 </resources>
