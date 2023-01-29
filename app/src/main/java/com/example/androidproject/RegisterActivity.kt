@@ -138,7 +138,7 @@ class RegisterActivity : AppCompatActivity() {
 
         mAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
-                progressBar.visibility = View.GONE
+                progressBar.visibility = View.INVISIBLE
 
                 if (task.isSuccessful) {
                     Toast.makeText(applicationContext, getString(R.string.register_successful), Toast.LENGTH_LONG).show()
