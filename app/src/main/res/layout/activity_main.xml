@@ -1,27 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".MainActivity"
-    android:background="@color/primary"
-    android:padding="25dp"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:orientation="vertical"
+        tools:context=".MainActivity"
+        android:background="@drawable/bg"
+        android:padding="25dp"
 >
-
     <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
-            android:text="Bienvenue !"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/google_sans"
+            android:textStyle="bold"
+            android:text="@string/welcome"
     />
 
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@android:color/white"
-            android:text="Veuillez vous connecter ou créer un compte pour utiliser à l'application."
+            android:gravity="center"
+            android:paddingHorizontal="70dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/proxima_nova"
+            android:text="@string/login_text"
     />
 
     <EditText
@@ -29,11 +37,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/auth_field_email"
-            android:backgroundTint="@color/white"
+            android:minHeight="50dp"
+            android:textSize="15sp"
+            android:fontFamily="@font/proxima_nova"
+            android:background="@drawable/auth_field_bg"
             android:textColorHint="@color/gray"
             android:textColor="@color/white"
+            android:textAlignment="center"
             android:autofillHints="emailAddress"
             android:inputType="textEmailAddress"
+            android:layout_marginTop="20dp"
     />
 
     <EditText
@@ -41,20 +54,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/auth_field_password"
-            android:backgroundTint="@color/white"
+            android:minHeight="50dp"
+            android:textSize="15sp"
+            android:fontFamily="@font/proxima_nova"
+            android:background="@drawable/auth_field_bg"
             android:textColorHint="@color/gray"
             android:textColor="@color/white"
             android:autofillHints="password"
             android:inputType="textPassword"
+            android:textAlignment="center"
+            android:layout_marginTop="13dp"
     />
 
     <Button
             android:id="@+id/loginButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/white"
-            android:textColor="@color/primary"
+            android:backgroundTint="@color/accent"
+            android:textColor="@color/white"
             android:text="@string/auth_login_button"
+            android:fontFamily="@font/proxima_nova"
+            android:height="57dp"
+            android:textSize="15sp"
+            android:textAllCaps="false"
+            android:layout_marginTop="90dp"
+            app:cornerRadius="4dp"
     />
 
     <ProgressBar
@@ -68,9 +92,34 @@
             android:id="@+id/registerButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:elevation="10dp"
+            android:textSize="15sp"
+            android:fontFamily="@font/proxima_nova"
+            android:textAllCaps="false"
+            android:height="57dp"
             android:text="@string/auth_register_button"
-            android:backgroundTint="@color/white"
-            android:textColor="@color/primary"
+            android:backgroundTint="@android:color/transparent"
+            android:textColor="@color/white"
+            app:cornerRadius="4dp"
+            app:strokeColor="@color/accent"
+            app:strokeWidth="1dp"
     />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+    >
+        <TextView
+            android:id="@+id/forgotPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/forgot_password"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:textSize="15sp"
+            android:fontFamily="@font/proxima_nova"
+            android:textColor="@color/gray2"
+            android:clickable="true"
+            android:focusable="true"
+        />
+    </RelativeLayout>
 </LinearLayout>

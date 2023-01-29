@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.androidproject.databinding.ActivityMainBinding
@@ -20,6 +21,8 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var mAuth: FirebaseAuth
 
+    private lateinit var forgotPassword: TextView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -32,6 +35,7 @@ class MainActivity : AppCompatActivity() {
 
         initRegisterButtonBehavior()
         initLoginButtonBehavior()
+        initForgotPasswordBehavior()
     }
 
     private fun initRegisterButtonBehavior() {
@@ -43,8 +47,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initLoginButtonBehavior() {
-        val registerButton: Button = findViewById(R.id.registerButton)
+        val registerButton: Button = findViewById(R.id.loginButton)
         registerButton.setOnClickListener{ loginUserAccount() }
+    }
+
+    private fun initForgotPasswordBehavior() {
+        forgotPassword.setOnClickListener {
+            println("Forgot password")
+
+            // val intent = Intent(this@MainActivity, ForgotPasswordActivity::class.java)
+            // startActivity(intent)
+        }
     }
 
     private fun loginUserAccount() {
@@ -82,5 +95,6 @@ class MainActivity : AppCompatActivity() {
         passwordTV = findViewById(R.id.password)
 
         progressBar = findViewById(R.id.progressBar)
+        forgotPassword = findViewById(R.id.forgotPassword)
     }
 }
