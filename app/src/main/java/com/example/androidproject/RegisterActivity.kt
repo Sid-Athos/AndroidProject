@@ -75,7 +75,7 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun checkPasswordLength() {
         if (passwordTV.text.length < 6) {
-            fieldSetError(passwordTV, "Le mot de passe doit contenir au moins 6 caractères")
+            fieldSetError(passwordTV, getString(R.string.auth_bad_password))
         } else {
             fieldResetError(passwordTV)
         }
@@ -87,7 +87,7 @@ class RegisterActivity : AppCompatActivity() {
 
         if (cpasswrd.isNotEmpty() && passwrd.isNotEmpty()) {
             if (cpasswordTV.text.toString() != passwrd) {
-                fieldSetError(cpasswordTV, "Passwords do not match")
+                fieldSetError(cpasswordTV, getString(R.string.auth_passwords_not_matching))
             } else {
                 fieldResetError(cpasswordTV)
             }
@@ -98,7 +98,7 @@ class RegisterActivity : AppCompatActivity() {
         var error = false
 
         if (usernameTV.text.isEmpty()) {
-            fieldSetError(usernameTV, "Entrez votre nom d'utilisateur")
+            fieldSetError(usernameTV, getString(R.string.auth_no_username))
             error = true
         }
 
@@ -107,7 +107,7 @@ class RegisterActivity : AppCompatActivity() {
             error = true
         } else {
             if (!android.util.Patterns.EMAIL_ADDRESS.matcher(emailTV.text).matches()) {
-                fieldSetError(emailTV, "Entrez une adresse email valide")
+                fieldSetError(emailTV, getString(R.string.auth_bad_email))
                 error = true
             }
         }

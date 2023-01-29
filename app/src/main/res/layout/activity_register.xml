@@ -9,7 +9,6 @@
     android:background="@drawable/bg"
     android:padding="25dp"
 >
-
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="vertical"

@@ -44,7 +44,13 @@
     <string name="auth_field_password">Mot de passe</string>
     <string name="auth_field_password_confirm">Vérification du mot de passe</string>
 
+    <string name="auth_no_username">Entre un nom d\'utilisateur!</string>
     <string name="auth_no_email">Entrez un E-mail!</string>
     <string name="auth_no_password">Entrez un mot de passe!</string>
+
+    <string name="auth_bad_email">Entrez une adresse email valide</string>
+    <string name="auth_bad_password">Le mot de passe doit contenir au moins 6 caractères</string>
+
+    <string name="auth_passwords_not_matching">Les mots de passe ne correspondent pas</string>
 
 </resources>
