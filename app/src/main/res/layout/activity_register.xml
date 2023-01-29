@@ -3,18 +3,57 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center_vertical"
+    android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="16dp"
-    tools:context=".RegisterActivity"
-    android:background="@color/primary"
+    tools:context=".MainActivity"
+    android:background="@drawable/bg"
+    android:padding="25dp"
 >
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
         android:layout_height="wrap_content"
-        android:text="@string/register_title"
-        android:textColor="@android:color/white"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+    >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            android:textSize="30sp"
+            android:fontFamily="@font/google_sans"
+            android:textStyle="bold"
+            android:text="@string/register_title"
+        />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/proxima_nova"
+            android:text="@string/register_text"
+        />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/auth_field_username"
+        android:minHeight="50dp"
+        android:textSize="15sp"
+        android:fontFamily="@font/proxima_nova"
+        android:background="@drawable/auth_field_bg"
+        android:textColorHint="@color/gray"
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:autofillHints="username"
+        android:inputType="textPersonName"
+        android:paddingHorizontal="13dp"
+        android:layout_marginTop="20dp"
     />
 
     <EditText
@@ -22,11 +61,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/auth_field_email"
-        android:backgroundTint="@color/white"
+        android:minHeight="50dp"
+        android:textSize="15sp"
+        android:fontFamily="@font/proxima_nova"
+        android:background="@drawable/auth_field_bg"
         android:textColorHint="@color/gray"
         android:textColor="@color/white"
+        android:textAlignment="center"
         android:autofillHints="emailAddress"
         android:inputType="textEmailAddress"
+        android:paddingHorizontal="13dp"
+        android:layout_marginTop="13dp"
     />
 
     <EditText
@@ -34,27 +79,58 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/auth_field_password"
-        android:backgroundTint="@color/white"
+        android:minHeight="50dp"
+        android:textSize="15sp"
+        android:fontFamily="@font/proxima_nova"
+        android:background="@drawable/auth_field_bg"
         android:textColorHint="@color/gray"
         android:textColor="@color/white"
-        android:importantForAutofill="no"
         android:inputType="textPassword"
+        android:paddingHorizontal="13dp"
+        android:importantForAutofill="no"
+        android:textAlignment="center"
+        android:layout_marginTop="13dp"
     />
 
-    <Button
-        android:id="@+id/register"
+    <EditText
+        android:id="@+id/password_confirm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/auth_register_button"
-        android:backgroundTint="@color/white"
-        android:textColor="@color/primary"
-        android:layout_marginTop="20dp"
+        android:hint="@string/auth_field_password_confirm"
+        android:minHeight="50dp"
+        android:textSize="15sp"
+        android:fontFamily="@font/proxima_nova"
+        android:background="@drawable/auth_field_bg"
+        android:textColorHint="@color/gray"
+        android:textColor="@color/white"
+        android:inputType="textPassword"
+        android:paddingHorizontal="13dp"
+        android:importantForAutofill="no"
+        android:textAlignment="center"
+        android:layout_marginTop="13dp"
     />
 
     <ProgressBar
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:layout_gravity="center"
+        android:layout_marginTop="26dp"
+        android:visibility="invisible"
+    />
+
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/accent"
+        android:textColor="@color/white"
+        android:text="@string/register_button"
+        android:fontFamily="@font/proxima_nova"
+        android:height="57dp"
+        android:textSize="15sp"
+        android:textAllCaps="false"
+        android:layout_marginTop="26dp"
+        app:cornerRadius="4dp"
     />
 </LinearLayout>
