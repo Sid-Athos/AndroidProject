@@ -44,6 +44,10 @@
             android:name=".RegisterActivity"
             android:theme="@style/Theme.AndroidProject.NoActionBar">
         </activity>
+        <activity
+            android:name=".ForgotPasswordActivity"
+            android:theme="@style/Theme.AndroidProject.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

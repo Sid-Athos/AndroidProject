@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Savg</string>
+
+    // Home page
     <string name="home_title">Home</string>
 
     <string name="like_button">Like button</string>
@@ -31,9 +33,12 @@
     <string name="register_failed">Registration failed! Please try again later</string>
 
     // Forgot password page
+    <string name="forgot_password_title">Mot de passe oublié</string>
+    <string name="forgot_password_text">Veuillez saisir votre email afin de réinitialiser votre mot de passe</string>
+
+    <string name="forgot_password_button">Renvoyer mon mot de passe</string>
 
     // Auth related
-
     <string name="auth_field_username">Nom d’utilisateur</string>
     <string name="auth_field_email">E-mail</string>
     <string name="auth_field_password">Mot de passe</string>

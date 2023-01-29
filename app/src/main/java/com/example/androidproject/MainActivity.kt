@@ -55,8 +55,8 @@ class MainActivity : AppCompatActivity() {
         forgotPassword.setOnClickListener {
             println("Forgot password")
 
-            // val intent = Intent(this@MainActivity, ForgotPasswordActivity::class.java)
-            // startActivity(intent)
+            val intent = Intent(this@MainActivity, ForgotPasswordActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -77,15 +77,15 @@ class MainActivity : AppCompatActivity() {
 
         mAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
+                progressBar.visibility = View.GONE
+
                 if (task.isSuccessful) {
                     Toast.makeText(applicationContext, getString(R.string.login_successful), Toast.LENGTH_LONG).show()
-                    progressBar.visibility = View.GONE
 
                     val intent = Intent(this@MainActivity, HomeActivity::class.java)
                     startActivity(intent)
                 } else {
                     Toast.makeText(applicationContext, getString(R.string.login_failed), Toast.LENGTH_LONG).show()
-                    progressBar.visibility = View.GONE
                 }
             }
     }

@@ -47,15 +47,15 @@ class RegisterActivity : AppCompatActivity() {
 
         mAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
+                progressBar.visibility = View.GONE
+
                 if (task.isSuccessful) {
                     Toast.makeText(applicationContext, getString(R.string.register_successful), Toast.LENGTH_LONG).show()
-                    progressBar.visibility = View.GONE
 
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                 } else {
                     Toast.makeText(applicationContext, getString(R.string.register_failed), Toast.LENGTH_LONG).show()
-                    progressBar.visibility = View.GONE
                 }
             }
     }
