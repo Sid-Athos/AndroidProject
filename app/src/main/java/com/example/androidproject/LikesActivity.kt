@@ -22,7 +22,7 @@ class LikesActivity: AppCompatActivity() {
     private fun initBackButton() {
         val backButton: ImageView = findViewById(R.id.backButton)
         backButton.setOnClickListener {
-            val homePage = Intent(this, MainActivity::class.java)
+            val homePage = Intent(this, HomeActivity::class.java)
             startActivity(homePage)
         }
     }
