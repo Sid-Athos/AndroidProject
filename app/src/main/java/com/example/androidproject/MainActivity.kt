@@ -2,6 +2,8 @@ package com.example.androidproject
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -9,6 +11,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.res.ResourcesCompat
 import com.example.androidproject.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseAuth
 
@@ -36,6 +39,36 @@ class MainActivity : AppCompatActivity() {
         initRegisterButtonBehavior()
         initLoginButtonBehavior()
         initForgotPasswordBehavior()
+
+        createFieldTextWatcher(emailTV) { fieldResetError(emailTV) }
+        createFieldTextWatcher(passwordTV) { fieldResetError(passwordTV) }
+    }
+
+    private fun fieldSetError(field: EditText, error: String) {
+        val icon = ResourcesCompat.getDrawable(resources, R.drawable.warning, null)
+
+        icon?.setBounds(
+            0, 0,
+            icon.intrinsicWidth,
+            icon.intrinsicHeight
+        )
+
+        field.setError(error, icon)
+
+        field.setBackgroundResource(R.drawable.auth_field_bg_error)
+    }
+
+    private fun fieldResetError(field: EditText) {
+        field.error = null
+        field.setBackgroundResource(R.drawable.auth_field_bg)
+    }
+
+    private fun createFieldTextWatcher(field: EditText, function: () -> Unit) {
+        field.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
+            override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
+            override fun afterTextChanged(editable: Editable) { return function() }
+        })
     }
 
     private fun initRegisterButtonBehavior() {
@@ -53,23 +86,35 @@ class MainActivity : AppCompatActivity() {
 
     private fun initForgotPasswordBehavior() {
         forgotPassword.setOnClickListener {
-            println("Forgot password")
-
             val intent = Intent(this@MainActivity, ForgotPasswordActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun checkForErrors(email: String, password: String): Boolean {
+        var error = false
+
+        if (email.isEmpty()) {
+            fieldSetError(emailTV, getString(R.string.auth_no_email))
+            error = true
+        } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            fieldSetError(emailTV, getString(R.string.auth_bad_email))
+            error = true
+        }
+
+        if (password.isEmpty()) {
+            fieldSetError(passwordTV, getString(R.string.auth_no_password))
+            error = true
+        }
+
+        return error
     }
 
     private fun loginUserAccount() {
         val email = emailTV.text.toString()
         val password = passwordTV.text.toString()
 
-        if (email.isEmpty()) {
-            Toast.makeText(applicationContext, getString(R.string.auth_no_email), Toast.LENGTH_LONG).show()
-            return
-        }
-        if (password.isEmpty()) {
-            Toast.makeText(applicationContext, getString(R.string.auth_no_password), Toast.LENGTH_LONG).show()
+        if (checkForErrors(email, password)) {
             return
         }
 
@@ -77,7 +122,7 @@ class MainActivity : AppCompatActivity() {
 
         mAuth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
-                progressBar.visibility = View.GONE
+                progressBar.visibility = View.INVISIBLE
 
                 if (task.isSuccessful) {
                     Toast.makeText(applicationContext, getString(R.string.login_successful), Toast.LENGTH_LONG).show()

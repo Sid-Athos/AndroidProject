@@ -38,13 +38,22 @@
 
     <string name="forgot_password_button">Resend my password</string>
 
+    <string name="forgot_password_successful">An email has been sent to you to reset your password</string>
+    <string name="forgot_password_failed">An error occurred while trying to reset your password. Please try again later</string>
+
     // Auth related
     <string name="auth_field_username">Username</string>
     <string name="auth_field_email">E-mail</string>
     <string name="auth_field_password">Password</string>
     <string name="auth_field_password_confirm">Password verification</string>
 
-    <string name="auth_no_email">Please enter email!</string>
-    <string name="auth_no_password">Please enter password!</string>
+    <string name="auth_no_username">Please enter a username!</string>
+    <string name="auth_no_email">Please enter an email!</string>
+    <string name="auth_no_password">Please enter a password!</string>
+
+    <string name="auth_bad_email">Please enter a valid email address!</string>
+    <string name="auth_bad_password">The password must contain at least 6 characters</string>
+
+    <string name="auth_passwords_not_matching">Passwords do not match</string>
 
 </resources>
