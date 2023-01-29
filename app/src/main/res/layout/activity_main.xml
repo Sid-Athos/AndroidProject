@@ -52,6 +52,7 @@
         android:textColor="@color/white"
         android:textAlignment="center"
         android:autofillHints="emailAddress"
+        android:paddingHorizontal="13dp"
         android:inputType="textEmailAddress"
     />
 
@@ -69,6 +70,7 @@
         android:autofillHints="password"
         android:inputType="textPassword"
         android:textAlignment="center"
+        android:paddingHorizontal="13dp"
         android:layout_marginTop="13dp"
     />
 

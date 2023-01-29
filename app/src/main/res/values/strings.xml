@@ -38,6 +38,9 @@
 
     <string name="forgot_password_button">Resend my password</string>
 
+    <string name="forgot_password_successful">An email has been sent to you to reset your password</string>
+    <string name="forgot_password_failed">An error occurred while trying to reset your password. Please try again later</string>
+
     // Auth related
     <string name="auth_field_username">Username</string>
     <string name="auth_field_email">E-mail</string>
