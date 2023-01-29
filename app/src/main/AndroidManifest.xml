@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -27,11 +29,23 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".HomeActivity"
+            android:theme="@style/Theme.AndroidProject.NoActionBar">
+        </activity>
+        <activity
             android:name=".LikesActivity"
             android:theme="@style/Theme.AndroidProject.NoActionBar">
         </activity>
         <activity
             android:name=".WishlistActivity"
+            android:theme="@style/Theme.AndroidProject.NoActionBar">
+        </activity>
+        <activity
+            android:name=".RegisterActivity"
+            android:theme="@style/Theme.AndroidProject.NoActionBar">
+        </activity>
+        <activity
+            android:name=".ForgotPasswordActivity"
             android:theme="@style/Theme.AndroidProject.NoActionBar">
         </activity>
     </application>

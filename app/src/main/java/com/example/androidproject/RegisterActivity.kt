@@ -8,40 +8,42 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
-import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
-import com.example.androidproject.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseAuth
 
-class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
 
+class RegisterActivity : AppCompatActivity() {
+    private lateinit var usernameTV: EditText
     private lateinit var emailTV: EditText
+
     private lateinit var passwordTV: EditText
+    private lateinit var cpasswordTV: EditText
+
+    private lateinit var regBtn: Button
     private lateinit var progressBar: ProgressBar
 
     private lateinit var mAuth: FirebaseAuth
 
-    private lateinit var forgotPassword: TextView
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        setContentView(R.layout.activity_register)
 
         mAuth = FirebaseAuth.getInstance()
 
         initializeUI()
 
-        initRegisterButtonBehavior()
-        initLoginButtonBehavior()
-        initForgotPasswordBehavior()
+        regBtn.setOnClickListener { registerNewUser() }
+
+        createFieldTextWatcher(cpasswordTV) { checkPasswordMatch()  }
+        createFieldTextWatcher(passwordTV) {
+            checkPasswordLength()
+            checkPasswordMatch()
+        }
 
         createFieldTextWatcher(emailTV) { fieldResetError(emailTV) }
-        createFieldTextWatcher(passwordTV) { fieldResetError(passwordTV) }
+        createFieldTextWatcher(usernameTV) { fieldResetError(usernameTV) }
     }
 
     private fun fieldSetError(field: EditText, error: String) {
@@ -71,75 +73,92 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun initRegisterButtonBehavior() {
-        val registerButton: Button = findViewById(R.id.registerButton)
-        registerButton.setOnClickListener{
-            val registerActivity = Intent(this, RegisterActivity::class.java)
-            startActivity(registerActivity)
+    private fun checkPasswordLength() {
+        if (passwordTV.text.length < 6) {
+            fieldSetError(passwordTV, getString(R.string.auth_bad_password))
+        } else {
+            fieldResetError(passwordTV)
         }
     }
 
-    private fun initLoginButtonBehavior() {
-        val registerButton: Button = findViewById(R.id.loginButton)
-        registerButton.setOnClickListener{ loginUserAccount() }
-    }
+    private fun checkPasswordMatch() {
+        val passwrd: String = passwordTV.text.toString()
+        val cpasswrd: String = cpasswordTV.text.toString()
 
-    private fun initForgotPasswordBehavior() {
-        forgotPassword.setOnClickListener {
-            val intent = Intent(this@MainActivity, ForgotPasswordActivity::class.java)
-            startActivity(intent)
+        if (cpasswrd.isNotEmpty() && passwrd.isNotEmpty()) {
+            if (cpasswordTV.text.toString() != passwrd) {
+                fieldSetError(cpasswordTV, getString(R.string.auth_passwords_not_matching))
+            } else {
+                fieldResetError(cpasswordTV)
+            }
         }
     }
 
-    private fun checkForErrors(email: String, password: String): Boolean {
+    private fun checkForErrors(): Boolean {
         var error = false
 
-        if (email.isEmpty()) {
+        if (usernameTV.text.isEmpty()) {
+            fieldSetError(usernameTV, getString(R.string.auth_no_username))
+            error = true
+        }
+
+        if (emailTV.text.isEmpty()) {
             fieldSetError(emailTV, getString(R.string.auth_no_email))
             error = true
-        } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+        } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(emailTV.text).matches()) {
             fieldSetError(emailTV, getString(R.string.auth_bad_email))
             error = true
         }
 
-        if (password.isEmpty()) {
+        if (passwordTV.text.isEmpty()) {
             fieldSetError(passwordTV, getString(R.string.auth_no_password))
+            error = true
+        }
+
+        if (passwordTV.error != null) {
+            error = true
+        }
+
+        if (cpasswordTV.error != null) {
             error = true
         }
 
         return error
     }
 
-    private fun loginUserAccount() {
+    private fun registerNewUser() {
         val email = emailTV.text.toString()
         val password = passwordTV.text.toString()
 
-        if (checkForErrors(email, password)) {
+        if (checkForErrors()) {
             return
         }
 
         progressBar.visibility = View.VISIBLE
 
-        mAuth.signInWithEmailAndPassword(email, password)
+        mAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 progressBar.visibility = View.INVISIBLE
 
                 if (task.isSuccessful) {
-                    Toast.makeText(applicationContext, getString(R.string.login_successful), Toast.LENGTH_LONG).show()
+                    Toast.makeText(applicationContext, getString(R.string.register_successful), Toast.LENGTH_LONG).show()
 
-                    val intent = Intent(this@MainActivity, HomeActivity::class.java)
+                    val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                 } else {
-                    Toast.makeText(applicationContext, getString(R.string.login_failed), Toast.LENGTH_LONG).show()
+                    Toast.makeText(applicationContext, getString(R.string.register_failed), Toast.LENGTH_LONG).show()
                 }
             }
     }
 
     private fun initializeUI() {
         emailTV = findViewById(R.id.email)
-        passwordTV = findViewById(R.id.password)
+        usernameTV = findViewById(R.id.username)
 
+        passwordTV = findViewById(R.id.password)
+        cpasswordTV = findViewById(R.id.password_confirm)
+
+        regBtn = findViewById(R.id.registerButton)
         progressBar = findViewById(R.id.progressBar)
-        forgotPassword = findViewById(R.id.forgotPassword)
     }
 }
