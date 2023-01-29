@@ -12,6 +12,7 @@
         <item name="colorPrimaryDark">@color/primary</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:navigationBarColor">@color/primary</item>
     </style>
     <style name="Theme.AndroidProject.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
     <style name="Theme.AndroidProject.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
