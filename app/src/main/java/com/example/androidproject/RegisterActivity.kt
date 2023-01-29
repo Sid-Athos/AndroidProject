@@ -63,7 +63,7 @@ class RegisterActivity : AppCompatActivity() {
     private fun initializeUI() {
         emailTV = findViewById(R.id.email)
         passwordTV = findViewById(R.id.password)
-        regBtn = findViewById(R.id.register)
+        regBtn = findViewById(R.id.registerButton)
         progressBar = findViewById(R.id.progressBar)
     }
 }
