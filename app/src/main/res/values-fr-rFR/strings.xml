@@ -18,8 +18,8 @@
     <string name="login_button">Se connecter</string>
     <string name="login_register_button">Créer un nouveau compte</string>
 
-    <string name="login_successful">Login successful!</string>
-    <string name="login_failed">Login failed! Please try again later</string>
+    <string name="login_successful">Connexion réussie!</string>
+    <string name="login_failed">Échec de la connexion! Veuillez réessayer plus tard</string>
 
     <string name="forgot_password"><u>Mot de passe oublié</u></string>
 

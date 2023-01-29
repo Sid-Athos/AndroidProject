@@ -105,11 +105,9 @@ class RegisterActivity : AppCompatActivity() {
         if (emailTV.text.isEmpty()) {
             fieldSetError(emailTV, getString(R.string.auth_no_email))
             error = true
-        } else {
-            if (!android.util.Patterns.EMAIL_ADDRESS.matcher(emailTV.text).matches()) {
-                fieldSetError(emailTV, getString(R.string.auth_bad_email))
-                error = true
-            }
+        } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(emailTV.text).matches()) {
+            fieldSetError(emailTV, getString(R.string.auth_bad_email))
+            error = true
         }
 
         if (passwordTV.text.isEmpty()) {
