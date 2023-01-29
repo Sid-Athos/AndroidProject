@@ -77,7 +77,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
 
         mAuth.sendPasswordResetEmail(email)
             .addOnCompleteListener { task ->
-                progressBar.visibility = View.GONE
+                progressBar.visibility = View.INVISIBLE
 
                 if (task.isSuccessful) {
                     Toast.makeText(applicationContext, getString(R.string.forgot_password_successful), Toast.LENGTH_LONG).show()
