@@ -58,4 +58,8 @@
 
     <string name="auth_passwords_not_matching">Les mots de passe ne correspondent pas</string>
 
+    // Game card
+    <string name="gameCover">Image du jeu</string>
+    <string name="knowMore">En savoir plus</string>
+
 </resources>

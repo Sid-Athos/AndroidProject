@@ -58,4 +58,7 @@
 
     <string name="auth_passwords_not_matching">Passwords do not match</string>
 
+    // Game card
+    <string name="gameCover">Game cover</string>
+    <string name="knowMore">Know more</string>
 </resources>
