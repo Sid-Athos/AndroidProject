@@ -8,13 +8,14 @@
     android:background="@color/cardview_dark_background"
     android:layout_height="wrap_content"
     android:paddingStart="0dp"
+    android:paddingEnd="0dp"
     android:layout_margin="20dp">
     <ImageView
         android:id="@+id/fragment_game_cover"
         android:layout_width="63dp"
         android:layout_height="78dp"
         android:layout_margin="15dp"
-        />
+            android:contentDescription="@string/game_cover" />
 
     <LinearLayout
         android:layout_width="0dp"
