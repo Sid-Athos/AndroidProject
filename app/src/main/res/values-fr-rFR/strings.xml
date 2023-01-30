@@ -4,12 +4,14 @@
     // Home page
     <string name="home_title">Accueil</string>
 
-    <string name="like_button">Bouton like</string>
-    <string name="wishlist_button">Bouton souhait</string>
+    <string name="like_button">Aller aux jeux aimés</string>
+    <string name="wishlist_button">Aller aux jeux désirés</string>
     <string name="close_button">Bouton fermer</string>
 
     <string name="likes_title">Likes</string>
     <string name="wishlist_title">Mes souhaits</string>
+
+    <string name="fragment_container">Contien le contenu principal</string>
 
     // Login page
     <string name="login_title">Bienvenue !</string>
