@@ -4,18 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.androidproject.databinding.ActivityLikesBinding
 
 
-class LikesActivity: AppCompatActivity() {
-    private lateinit var binding: ActivityLikesBinding
-
+class LikesActivity: AppCompatActivity(R.layout.activity_likes) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = ActivityLikesBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
         initBackButton()
     }
 

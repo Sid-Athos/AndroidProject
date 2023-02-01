@@ -4,18 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.androidproject.databinding.ActivityWishlistBinding
 
 
-class WishlistActivity: AppCompatActivity() {
-    private lateinit var binding: ActivityWishlistBinding
-
+class WishlistActivity: AppCompatActivity(R.layout.activity_wishlist) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = ActivityWishlistBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
         initBackButton()
     }
 

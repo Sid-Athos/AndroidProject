@@ -15,7 +15,7 @@ import androidx.core.content.res.ResourcesCompat
 import com.example.androidproject.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseAuth
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(R.layout.activity_main) {
     private lateinit var binding: ActivityMainBinding
 
     private lateinit var emailTV: EditText
@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var progressBar: ProgressBar
 
     private lateinit var mAuth: FirebaseAuth
-
     private lateinit var forgotPassword: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
