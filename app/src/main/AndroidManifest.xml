@@ -29,23 +29,23 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".HomeActivity"
+            android:name=".fragments.home.HomeActivity"
             android:theme="@style/Theme.AndroidProject.NoActionBar">
         </activity>
         <activity
-            android:name=".LikesActivity"
+            android:name=".fragments.LikesActivity"
             android:theme="@style/Theme.AndroidProject.NoActionBar">
         </activity>
         <activity
-            android:name=".WishlistActivity"
+            android:name=".fragments.WishlistActivity"
             android:theme="@style/Theme.AndroidProject.NoActionBar">
         </activity>
         <activity
-            android:name=".RegisterActivity"
+            android:name=".fragments.auth.RegisterActivity"
             android:theme="@style/Theme.AndroidProject.NoActionBar">
         </activity>
         <activity
-            android:name=".ForgotPasswordActivity"
+            android:name=".fragments.auth.ForgotPasswordActivity"
             android:theme="@style/Theme.AndroidProject.NoActionBar">
         </activity>
     </application>

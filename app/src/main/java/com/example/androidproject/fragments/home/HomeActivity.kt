@@ -1,9 +1,12 @@
-package com.example.androidproject
+package com.example.androidproject.fragments.home
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.androidproject.fragments.LikesActivity
+import com.example.androidproject.R
+import com.example.androidproject.fragments.WishlistActivity
 import com.example.androidproject.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {

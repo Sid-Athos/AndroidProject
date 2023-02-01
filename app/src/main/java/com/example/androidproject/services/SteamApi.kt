@@ -1,4 +1,4 @@
-package com.example.services
+package com.example.androidproject.services
 
 import retrofit2.http.GET
 
