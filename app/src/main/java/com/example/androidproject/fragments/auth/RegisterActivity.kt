@@ -2,17 +2,15 @@ package com.example.androidproject.fragments.auth
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.res.ResourcesCompat
 import com.example.androidproject.MainActivity
 import com.example.androidproject.R
+import com.example.androidproject.utils.FormsUtils
 import com.google.firebase.auth.FirebaseAuth
 
 
@@ -38,48 +36,21 @@ class RegisterActivity : AppCompatActivity() {
 
         regBtn.setOnClickListener { registerNewUser() }
 
-        createFieldTextWatcher(cpasswordTV) { checkPasswordMatch()  }
-        createFieldTextWatcher(passwordTV) {
+        FormsUtils.createFieldTextWatcher(cpasswordTV) { checkPasswordMatch()  }
+        FormsUtils.createFieldTextWatcher(passwordTV) {
             checkPasswordLength()
             checkPasswordMatch()
         }
 
-        createFieldTextWatcher(emailTV) { fieldResetError(emailTV) }
-        createFieldTextWatcher(usernameTV) { fieldResetError(usernameTV) }
-    }
-
-    private fun fieldSetError(field: EditText, error: String) {
-        val icon = ResourcesCompat.getDrawable(resources, R.drawable.warning, null)
-
-        icon?.setBounds(
-            0, 0,
-            icon.intrinsicWidth,
-            icon.intrinsicHeight
-        )
-
-        field.setError(error, icon)
-
-        field.setBackgroundResource(R.drawable.auth_field_bg_error)
-    }
-
-    private fun fieldResetError(field: EditText) {
-        field.error = null
-        field.setBackgroundResource(R.drawable.auth_field_bg)
-    }
-
-    private fun createFieldTextWatcher(field: EditText, function: () -> Unit) {
-        field.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
-            override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
-            override fun afterTextChanged(editable: Editable) { return function() }
-        })
+        FormsUtils.createFieldTextWatcherResetError(emailTV)
+        FormsUtils.createFieldTextWatcherResetError(usernameTV)
     }
 
     private fun checkPasswordLength() {
         if (passwordTV.text.length < 6) {
-            fieldSetError(passwordTV, getString(R.string.auth_bad_password))
+            FormsUtils.fieldSetError(resources, passwordTV, getString(R.string.auth_bad_password))
         } else {
-            fieldResetError(passwordTV)
+            FormsUtils.fieldResetError(passwordTV)
         }
     }
 
@@ -89,9 +60,9 @@ class RegisterActivity : AppCompatActivity() {
 
         if (cpasswrd.isNotEmpty() && passwrd.isNotEmpty()) {
             if (cpasswordTV.text.toString() != passwrd) {
-                fieldSetError(cpasswordTV, getString(R.string.auth_passwords_not_matching))
+                FormsUtils.fieldSetError(resources, cpasswordTV, getString(R.string.auth_passwords_not_matching))
             } else {
-                fieldResetError(cpasswordTV)
+                FormsUtils.fieldResetError(cpasswordTV)
             }
         }
     }
@@ -100,20 +71,20 @@ class RegisterActivity : AppCompatActivity() {
         var error = false
 
         if (usernameTV.text.isEmpty()) {
-            fieldSetError(usernameTV, getString(R.string.auth_no_username))
+            FormsUtils.fieldSetError(resources, usernameTV, getString(R.string.auth_no_username))
             error = true
         }
 
         if (emailTV.text.isEmpty()) {
-            fieldSetError(emailTV, getString(R.string.auth_no_email))
+            FormsUtils.fieldSetError(resources, emailTV, getString(R.string.auth_no_email))
             error = true
         } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(emailTV.text).matches()) {
-            fieldSetError(emailTV, getString(R.string.auth_bad_email))
+            FormsUtils.fieldSetError(resources, emailTV, getString(R.string.auth_bad_email))
             error = true
         }
 
         if (passwordTV.text.isEmpty()) {
-            fieldSetError(passwordTV, getString(R.string.auth_no_password))
+            FormsUtils.fieldSetError(resources, passwordTV, getString(R.string.auth_no_password))
             error = true
         }
 

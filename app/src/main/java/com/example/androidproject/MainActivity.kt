@@ -13,9 +13,7 @@ import com.example.androidproject.fragments.auth.ForgotPasswordActivity
 import com.example.androidproject.fragments.auth.RegisterActivity
 import com.example.androidproject.databinding.ActivityMainBinding
 import com.example.androidproject.fragments.home.HomeActivity
-import com.example.androidproject.utils.createFieldTextWatcher
-import com.example.androidproject.utils.fieldResetError
-import com.example.androidproject.utils.fieldSetError
+import com.example.androidproject.utils.FormsUtils
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
@@ -42,8 +40,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         initLoginButtonBehavior()
         initForgotPasswordBehavior()
 
-        createFieldTextWatcher(emailTV) { fieldResetError(emailTV) }
-        createFieldTextWatcher(passwordTV) { fieldResetError(passwordTV) }
+        FormsUtils.createFieldTextWatcherResetError(emailTV)
+        FormsUtils.createFieldTextWatcherResetError(passwordTV)
     }
 
     private fun initRegisterButtonBehavior() {
@@ -70,15 +68,15 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         var error = false
 
         if (email.isEmpty()) {
-            fieldSetError(resources, emailTV, getString(R.string.auth_no_email))
+            FormsUtils.fieldSetError(resources, emailTV, getString(R.string.auth_no_email))
             error = true
         } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            fieldSetError(resources, emailTV, getString(R.string.auth_bad_email))
+            FormsUtils.fieldSetError(resources, emailTV, getString(R.string.auth_bad_email))
             error = true
         }
 
         if (password.isEmpty()) {
-            fieldSetError(resources, passwordTV, getString(R.string.auth_no_password))
+            FormsUtils.fieldSetError(resources, passwordTV, getString(R.string.auth_no_password))
             error = true
         }
 

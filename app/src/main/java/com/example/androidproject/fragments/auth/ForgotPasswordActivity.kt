@@ -2,14 +2,12 @@ package com.example.androidproject.fragments.auth
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.res.ResourcesCompat
 import com.example.androidproject.MainActivity
 import com.example.androidproject.R
+import com.example.androidproject.utils.FormsUtils
 import com.google.firebase.auth.FirebaseAuth
 
 class ForgotPasswordActivity : AppCompatActivity() {
@@ -27,34 +25,9 @@ class ForgotPasswordActivity : AppCompatActivity() {
 
         initializeUI()
 
-        emailTV.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
-            override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
-            override fun afterTextChanged(editable: Editable) {
-                fieldResetError(emailTV)
-            }
-        })
-
         initSubmitButtonBehavior()
-    }
 
-    private fun fieldSetError(field: EditText, error: String) {
-        val icon = ResourcesCompat.getDrawable(resources, R.drawable.warning, null)
-
-        icon?.setBounds(
-            0, 0,
-            icon.intrinsicWidth,
-            icon.intrinsicHeight
-        )
-
-        field.setError(error, icon)
-
-        field.setBackgroundResource(R.drawable.auth_field_bg_error)
-    }
-
-    private fun fieldResetError(field: EditText) {
-        field.error = null
-        field.setBackgroundResource(R.drawable.auth_field_bg)
+        FormsUtils.createFieldTextWatcherResetError(emailTV)
     }
 
     private fun initSubmitButtonBehavior() {
@@ -66,12 +39,12 @@ class ForgotPasswordActivity : AppCompatActivity() {
         val email = emailTV.text.toString()
 
         if (email.isEmpty()) {
-            fieldSetError(emailTV, getString(R.string.auth_no_email))
+            FormsUtils.fieldSetError(resources, emailTV, getString(R.string.auth_no_email))
             return
         }
 
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(emailTV.text).matches()) {
-            fieldSetError(emailTV, getString(R.string.auth_bad_email))
+            FormsUtils.fieldSetError(resources, emailTV, getString(R.string.auth_bad_email))
             return
         }
 
