@@ -74,5 +74,6 @@
     // Game card
     <string name="gameCover">Image du jeu</string>
     <string name="knowMore">En savoir plus</string>
+    <string name="gamePrice"><u>prix : %s</u></string>
 
 </resources>

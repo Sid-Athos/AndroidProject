@@ -12,7 +12,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
 
         val recyclerView: RecyclerView = view.findViewById(R.id.game_list_view)
-        val games = listOf("2240","970","821","10","2240","970","821","10","2240","970","821","10","2240","970","821","10")
+        val games = listOf("10","10","10","10")
         recyclerView.adapter = GameCardList(games, true)
     }
 }
