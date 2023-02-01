@@ -14,8 +14,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
 
         val recyclerView: RecyclerView = view.findViewById(R.id.game_list_view)
-        val color = resources.getColor(R.color.white)
-        recyclerView.setBackgroundColor(color)
         val games = listOf("2240","970","821","10","2240","970","821","10","2240","970","821","10","2240","970","821","10")
         recyclerView.adapter = GameCardList(games, true)
     }

@@ -18,8 +18,6 @@ class GameCardList(private val games: List<String>, private val displayDetails: 
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(viewGroup.context).inflate(R.layout.fragment_game_card, viewGroup, false)
-        Log.v("games", games.toString())
-        Log.v("display details", displayDetails.toString())
         return ViewHolder(view)
     }
 
