@@ -56,4 +56,10 @@
 
     <string name="auth_passwords_not_matching">Passwords do not match</string>
 
+    // Lists related
+    <string name="more_info">Learn more</string>
+    <string name="game_price"><u>Price : %1$d €</u></string>
+    <string name="game_cover"><u>%1$s</u></string>
+    <string name="game_editor"><u>%1$s</u></string>
+
 </resources>

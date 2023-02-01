@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.androidproject.databinding.ActivityLikesBinding
+import com.example.androidproject.fragments.Home
 
 
 class LikesActivity: AppCompatActivity() {
@@ -22,7 +23,7 @@ class LikesActivity: AppCompatActivity() {
     private fun initBackButton() {
         val backButton: ImageView = findViewById(R.id.backButton)
         backButton.setOnClickListener {
-            val homePage = Intent(this, HomeActivity::class.java)
+            val homePage = Intent(this, Home::class.java)
             startActivity(homePage)
         }
     }
