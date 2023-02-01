@@ -1,4 +1,4 @@
-package com.example.androidproject
+package com.example.androidproject.fragments.auth
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,6 +8,8 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
+import com.example.androidproject.MainActivity
+import com.example.androidproject.R
 import com.google.firebase.auth.FirebaseAuth
 
 class ForgotPasswordActivity : AppCompatActivity() {

@@ -55,7 +55,7 @@
                     android:id="@+id/home_fragment_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:name="com.example.androidproject.HomeFragment"
+                    android:name="com.example.androidproject.fragments.home.HomeFragment"
                     tools:layout="@layout/fragment_home" />
             </LinearLayout>
         </ScrollView>

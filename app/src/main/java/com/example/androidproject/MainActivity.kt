@@ -12,7 +12,10 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
+import com.example.androidproject.fragments.auth.ForgotPasswordActivity
+import com.example.androidproject.fragments.auth.RegisterActivity
 import com.example.androidproject.databinding.ActivityMainBinding
+import com.example.androidproject.fragments.home.HomeActivity
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
