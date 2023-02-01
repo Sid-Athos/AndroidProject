@@ -2,8 +2,6 @@ package com.example.androidproject
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -11,11 +9,13 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.res.ResourcesCompat
 import com.example.androidproject.fragments.auth.ForgotPasswordActivity
 import com.example.androidproject.fragments.auth.RegisterActivity
 import com.example.androidproject.databinding.ActivityMainBinding
 import com.example.androidproject.fragments.home.HomeActivity
+import com.example.androidproject.utils.createFieldTextWatcher
+import com.example.androidproject.utils.fieldResetError
+import com.example.androidproject.utils.fieldSetError
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
@@ -46,33 +46,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         createFieldTextWatcher(passwordTV) { fieldResetError(passwordTV) }
     }
 
-    private fun fieldSetError(field: EditText, error: String) {
-        val icon = ResourcesCompat.getDrawable(resources, R.drawable.warning, null)
-
-        icon?.setBounds(
-            0, 0,
-            icon.intrinsicWidth,
-            icon.intrinsicHeight
-        )
-
-        field.setError(error, icon)
-
-        field.setBackgroundResource(R.drawable.auth_field_bg_error)
-    }
-
-    private fun fieldResetError(field: EditText) {
-        field.error = null
-        field.setBackgroundResource(R.drawable.auth_field_bg)
-    }
-
-    private fun createFieldTextWatcher(field: EditText, function: () -> Unit) {
-        field.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
-            override fun onTextChanged(charSequence: CharSequence, i: Int, i1: Int, i2: Int) {}
-            override fun afterTextChanged(editable: Editable) { return function() }
-        })
-    }
-
     private fun initRegisterButtonBehavior() {
         val registerButton: Button = findViewById(R.id.registerButton)
         registerButton.setOnClickListener{
@@ -97,15 +70,15 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
         var error = false
 
         if (email.isEmpty()) {
-            fieldSetError(emailTV, getString(R.string.auth_no_email))
+            fieldSetError(resources, emailTV, getString(R.string.auth_no_email))
             error = true
         } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            fieldSetError(emailTV, getString(R.string.auth_bad_email))
+            fieldSetError(resources, emailTV, getString(R.string.auth_bad_email))
             error = true
         }
 
         if (password.isEmpty()) {
-            fieldSetError(passwordTV, getString(R.string.auth_no_password))
+            fieldSetError(resources, passwordTV, getString(R.string.auth_no_password))
             error = true
         }
 
