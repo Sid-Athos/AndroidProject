@@ -37,7 +37,7 @@
             android:theme="@style/Theme.AndroidProject.NoActionBar">
         </activity>
         <activity
-            android:name=".WishlistActivity"
+            android:name=".fragments.Wishlist"
             android:theme="@style/Theme.AndroidProject.NoActionBar">
         </activity>
         <activity
