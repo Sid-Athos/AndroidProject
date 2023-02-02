@@ -26,9 +26,14 @@ class ForgotPasswordFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        authService = AuthService()
-
         initializeUI(view)
+
+        arguments?.let {
+            val email = ForgotPasswordFragmentArgs.fromBundle(it).email
+            emailTV.setText(email)
+        }
+
+        authService = AuthService()
 
         initSubmitButtonBehavior()
 

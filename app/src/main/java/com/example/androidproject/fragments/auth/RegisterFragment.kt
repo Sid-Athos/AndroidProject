@@ -40,6 +40,11 @@ class RegisterFragment : Fragment() {
 
         initializeUI(view)
 
+        arguments?.let {
+            val email = RegisterFragmentArgs.fromBundle(it).email
+            emailTV.setText(email)
+        }
+
         regBtn.setOnClickListener {
             GlobalScope.launch { registerNewUser() }
         }

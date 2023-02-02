@@ -57,7 +57,9 @@ class WelcomeFragment : Fragment() {
 
     private fun initRegisterButtonBehavior() {
         registerButton.setOnClickListener{
-            val action: NavDirections = WelcomeFragmentDirections.actionWelcomeFragmentToRegisterFragment()
+            val action: NavDirections = WelcomeFragmentDirections.actionWelcomeFragmentToRegisterFragment(
+                emailTV.text.toString()
+            )
             findNavController().navigate(action)
         }
     }
@@ -73,7 +75,9 @@ class WelcomeFragment : Fragment() {
 
     private fun initForgotPasswordBehavior() {
         forgotPassword.setOnClickListener {
-            val action: NavDirections = WelcomeFragmentDirections.actionWelcomeFragmentToForgotPasswordFragment()
+            val action: NavDirections = WelcomeFragmentDirections.actionWelcomeFragmentToForgotPasswordFragment(
+                emailTV.text.toString()
+            )
             findNavController().navigate(action)
         }
     }
