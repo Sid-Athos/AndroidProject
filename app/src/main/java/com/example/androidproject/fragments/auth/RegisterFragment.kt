@@ -14,6 +14,8 @@ import com.example.androidproject.R
 import com.example.androidproject.utils.FormsUtils
 import com.google.firebase.auth.FirebaseAuth
 import androidx.navigation.fragment.findNavController
+import kotlinx.coroutines.*
+import kotlinx.coroutines.tasks.await
 
 
 class RegisterFragment : Fragment() {
@@ -28,13 +30,16 @@ class RegisterFragment : Fragment() {
 
     private lateinit var mAuth: FirebaseAuth
 
+    @OptIn(DelicateCoroutinesApi::class)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mAuth = FirebaseAuth.getInstance()
 
         initializeUI(view)
 
-        regBtn.setOnClickListener { registerNewUser() }
+        regBtn.setOnClickListener {
+            GlobalScope.launch { registerNewUser() }
+        }
 
         FormsUtils.createFieldTextWatcher(cpasswordTV) { checkPasswordMatch()  }
         FormsUtils.createFieldTextWatcher(passwordTV) {
@@ -106,7 +111,7 @@ class RegisterFragment : Fragment() {
         return error
     }
 
-    private fun registerNewUser() {
+    private suspend fun registerNewUser() {
         val email = emailTV.text.toString()
         val password = passwordTV.text.toString()
 
@@ -116,19 +121,20 @@ class RegisterFragment : Fragment() {
 
         progressBar.visibility = View.VISIBLE
 
-        mAuth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener { task ->
-                progressBar.visibility = View.INVISIBLE
+        val registerResult = mAuth.createUserWithEmailAndPassword(email, password).await()
 
-                if (task.isSuccessful) {
-                    Toast.makeText(context, getString(R.string.register_successful), Toast.LENGTH_LONG).show()
+        withContext(Dispatchers.Main) {
+            progressBar.visibility = View.INVISIBLE
 
-                    val action: NavDirections = RegisterFragmentDirections.actionRegisterFragmentToWelcomeFragment()
-                    findNavController().navigate(action)
-                } else {
-                    Toast.makeText(context, getString(R.string.register_failed), Toast.LENGTH_LONG).show()
-                }
+            if (registerResult.user != null) {
+                Toast.makeText(context, getString(R.string.register_successful), Toast.LENGTH_LONG).show()
+
+                val action: NavDirections = RegisterFragmentDirections.actionRegisterFragmentToWelcomeFragment()
+                findNavController().navigate(action)
+            } else {
+                Toast.makeText(context, getString(R.string.register_failed), Toast.LENGTH_LONG).show()
             }
+        }
     }
 
     private fun initializeUI(view: View) {

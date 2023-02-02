@@ -11,7 +11,10 @@ import androidx.navigation.fragment.findNavController
 import com.example.androidproject.R
 import com.example.androidproject.utils.FormsUtils
 import com.google.firebase.auth.FirebaseAuth
-
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 
 class WelcomeFragment : Fragment() {
     private lateinit var emailTV: EditText
@@ -54,8 +57,11 @@ class WelcomeFragment : Fragment() {
         }
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
     private fun initLoginButtonBehavior() {
-        loginButton.setOnClickListener{ loginUserAccount() }
+        loginButton.setOnClickListener{
+            GlobalScope.launch { loginUserAccount() }
+        }
     }
 
     private fun initForgotPasswordBehavior() {
@@ -84,29 +90,30 @@ class WelcomeFragment : Fragment() {
         return error
     }
 
-    private fun loginUserAccount() {
-        val email = emailTV.text.toString()
-        val password = passwordTV.text.toString()
+    private suspend fun loginUserAccount() {
+        return withContext(Dispatchers.Main) {
+            val email = emailTV.text.toString()
+            val password = passwordTV.text.toString()
 
-        if (checkForErrors(email, password)) {
-            return
-        }
-
-        progressBar.visibility = View.VISIBLE
-
-        mAuth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener { task ->
-                progressBar.visibility = View.INVISIBLE
-
-                if (task.isSuccessful) {
-                    Toast.makeText(context, getString(R.string.login_successful), Toast.LENGTH_LONG).show()
-
-                    val action: NavDirections = WelcomeFragmentDirections.actionWelcomeFragmentToHomeFragment()
-                    findNavController().navigate(action)
-                } else {
-                    Toast.makeText(context, getString(R.string.login_failed), Toast.LENGTH_LONG).show()
-                }
+            if (checkForErrors(email, password)) {
+                return@withContext
             }
+
+            progressBar.visibility = View.VISIBLE
+
+            try {
+                mAuth.signInWithEmailAndPassword(email, password).await()
+
+                Toast.makeText(context, getString(R.string.login_successful), Toast.LENGTH_LONG).show()
+
+                val action: NavDirections = WelcomeFragmentDirections.actionWelcomeFragmentToHomeFragment()
+                findNavController().navigate(action)
+            } catch (e: Exception) {
+                Toast.makeText(context, e.message, Toast.LENGTH_LONG).show()
+            }
+
+            progressBar.visibility = View.INVISIBLE
+        }
     }
 
     private fun initializeUI(view: View) {
