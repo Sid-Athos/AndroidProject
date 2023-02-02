@@ -13,7 +13,6 @@ import com.google.firebase.auth.FirebaseAuth
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
         var fragmentManager= supportFragmentManager
         var tx =fragmentManager.beginTransaction()
         val mememe : List<GameResume> =  listOf();
