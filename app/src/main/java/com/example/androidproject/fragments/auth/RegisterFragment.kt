@@ -10,10 +10,11 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import com.example.androidproject.R
 import com.example.androidproject.utils.FormsUtils
 import com.google.firebase.auth.FirebaseAuth
-import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.UserProfileChangeRequest
 import kotlinx.coroutines.*
 import kotlinx.coroutines.tasks.await
 
@@ -124,6 +125,10 @@ class RegisterFragment : Fragment() {
 
             try {
                 mAuth.createUserWithEmailAndPassword(email, password).await()
+
+                mAuth.currentUser?.updateProfile(
+                    UserProfileChangeRequest.Builder().setDisplayName(usernameTV.text.toString()).build()
+                )?.await()
 
                 Toast.makeText(context, getString(R.string.register_successful), Toast.LENGTH_LONG).show()
 
