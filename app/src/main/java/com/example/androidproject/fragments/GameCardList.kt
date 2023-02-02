@@ -51,6 +51,7 @@ class GameCardList(private val games: List<String>, private val displayDetails: 
 
         fun bind(data: Game, showDetails: Boolean) {
             GlobalScope.launch {
+                Log.v("game list cover", data.coverUrl.toString())
                 val coverBitmap = BitmapFactory.decodeStream(withContext(Dispatchers.IO) {
                     data.coverUrl.openStream()
                 })
@@ -101,17 +102,13 @@ class GameCardList(private val games: List<String>, private val displayDetails: 
                     data = api.getAppById(gameId).await()
                 }
 
-                Log.v("game list id", gameId)
-
-                val newGame = Game(gameId, data)
-                (parent.requireActivity() as MainActivity).cache[gameId] = newGame
-                holder.bind(newGame, displayDetails)
+                if (data.asJsonObject.get(gameId).asJsonObject.get("success").asBoolean) {
+                    val newGame = Game(gameId, data)
+                    (parent.requireActivity() as MainActivity).cache[gameId] = newGame
+                    holder.bind(newGame, displayDetails)
+                }
             }
-        } else {
-            Log.v("game list game", game.toString())
-            holder.bind(game, displayDetails)
-        }
-        Log.v("game list holder", (parent.requireActivity() as MainActivity).cache.toString())
+        } else holder.bind(game, displayDetails)
     }
 
     override fun getItemCount(): Int {

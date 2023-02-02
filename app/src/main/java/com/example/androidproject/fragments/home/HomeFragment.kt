@@ -29,7 +29,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         GlobalScope.launch(Dispatchers.Main) {
             try {
                 val response = api.getMostSelledGames().await()
-                val games = response.asJsonObject.get("response").asJsonObject.get("ranks").asJsonArray.take(20).map { rank -> rank.asJsonObject.get("appid").toString() }
+                val games = response.asJsonObject
+                    .get("response").asJsonObject
+                    .get("ranks").asJsonArray
+                    .take(30)
+                    .map { rank -> rank.asJsonObject.get("appid").toString() }
                 recyclerView.adapter = GameCardList(games, true, this@HomeFragment)
             } catch (e: Exception) { Log.e("Game Card Bind:", e.toString()) }
         }
