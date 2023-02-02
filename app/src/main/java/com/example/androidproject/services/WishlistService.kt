@@ -1,6 +1,6 @@
 package com.example.androidproject.services
 
-import com.example.androidproject.fragments.models.Wishlist
+import com.example.androidproject.models.Wishlist
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
