@@ -16,6 +16,7 @@ import com.example.androidproject.R
 import com.example.androidproject.services.AuthService
 import com.example.androidproject.utils.AuthUtils
 import com.example.androidproject.utils.FormsUtils
+import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.FirebaseAuthException
 import kotlinx.coroutines.*
 
@@ -43,7 +44,7 @@ class RegisterFragment : Fragment() {
             GlobalScope.launch { registerNewUser() }
         }
 
-        FormsUtils.createFieldTextWatcher(cpasswordTV) { checkPasswordMatch()  }
+        FormsUtils.createFieldTextWatcher(cpasswordTV) { checkPasswordMatch() }
         FormsUtils.createFieldTextWatcher(passwordTV) {
             checkPasswordLength()
             checkPasswordMatch()
@@ -134,9 +135,12 @@ class RegisterFragment : Fragment() {
                 findNavController().navigate(action)
             } catch (e: FirebaseAuthException) {
                 Log.d("Register", "Error: ${e.errorCode} - ${e.message}")
-                Toast.makeText(context, AuthUtils.getErrorString(resources, e), Toast.LENGTH_LONG).show()
+                Toast.makeText(context, AuthUtils.getAuthErrorString(resources, e), Toast.LENGTH_LONG).show()
+            } catch (e: FirebaseTooManyRequestsException) {
+                Log.d("Register", "Error: ${e.message}")
+                Toast.makeText(context, getString(R.string.auth_error_too_many_requests), Toast.LENGTH_LONG).show()
             } catch (e: Exception) {
-                Log.e("Login", "Error: ${e.message}")
+                Log.e("Register", "Error: ${e.message}")
                 Toast.makeText(context, getString(R.string.auth_error_unknown), Toast.LENGTH_LONG).show()
             }
 

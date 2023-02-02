@@ -1,17 +1,19 @@
 package com.example.androidproject.fragments.auth
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
 import com.example.androidproject.R
+import com.example.androidproject.services.AuthService
 import com.example.androidproject.utils.AuthUtils
 import com.example.androidproject.utils.FormsUtils
-import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.FirebaseTooManyRequestsException
+import com.google.firebase.auth.FirebaseAuthException
 import kotlinx.coroutines.*
-import kotlinx.coroutines.tasks.await
 
 class ForgotPasswordFragment : Fragment() {
     private lateinit var emailTV: EditText
@@ -19,13 +21,12 @@ class ForgotPasswordFragment : Fragment() {
 
     private lateinit var submitButton: Button
 
-    private lateinit var mAuth: FirebaseAuth
+    private lateinit var authService: AuthService
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mAuth = FirebaseAuth.getInstance()
-        mAuth.useAppLanguage()
+        authService = AuthService()
 
         initializeUI(view)
 
@@ -68,9 +69,16 @@ class ForgotPasswordFragment : Fragment() {
             progressBar.visibility = View.VISIBLE
 
             try {
-                mAuth.sendPasswordResetEmail(email).await()
+                authService.resetPassword(email)
                 Toast.makeText(context, getString(R.string.forgot_password_successful), Toast.LENGTH_LONG).show()
+            } catch (e: FirebaseAuthException) {
+                Log.d("ForgotPassword", "Error code: ${e.errorCode}")
+                Toast.makeText(context, AuthUtils.getResetPasswordErrorString(resources, e), Toast.LENGTH_LONG).show()
+            } catch (e: FirebaseTooManyRequestsException) {
+                Log.d("ForgotPassword", "Error: ${e.message}")
+                Toast.makeText(context, getString(R.string.auth_error_too_many_requests), Toast.LENGTH_LONG).show()
             } catch (e: Exception) {
+                Log.e("ForgotPassword", e.message.toString())
                 Toast.makeText(context, getString(R.string.forgot_password_failed), Toast.LENGTH_LONG).show()
             }
 

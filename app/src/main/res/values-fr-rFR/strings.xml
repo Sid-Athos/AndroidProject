@@ -43,6 +43,8 @@
     <string name="forgot_password_successful">Un email vous a été envoyé pour réinitialiser votre mot de passe</string>
     <string name="forgot_password_failed">Une erreur s\'est produite lors de la tentative de réinitialisation de votre mot de passe. Veuillez réessayer plus tard</string>
 
+    <string name="forgot_password_error_user_not_found">Cet e-mail n\'est associé à aucun compte.</string>
+
     // Auth related
     <string name="auth_field_username">Nom d’utilisateur</string>
     <string name="auth_field_email">E-mail</string>

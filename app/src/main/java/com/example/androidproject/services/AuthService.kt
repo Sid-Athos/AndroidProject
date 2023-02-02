@@ -5,8 +5,12 @@ import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.tasks.await
 import com.google.firebase.auth.UserProfileChangeRequest
 
-class AuthService {
+class AuthService() {
     private val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
+
+    init {
+        mAuth.useAppLanguage()
+    }
 
     fun getCurrentUser() = mAuth.currentUser
 
@@ -29,4 +33,6 @@ class AuthService {
             
             return@run res
         }
+
+    suspend fun resetPassword(email: String) = mAuth.sendPasswordResetEmail(email).await()
 }

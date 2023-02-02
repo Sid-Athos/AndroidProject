@@ -116,7 +116,7 @@ class WelcomeFragment : Fragment() {
                 findNavController().navigate(action)
             } catch (e: FirebaseAuthException) {
                 Log.d("Login", "Error: ${e.errorCode} - ${e.message}")
-                Toast.makeText(context, AuthUtils.getErrorString(resources, e), Toast.LENGTH_LONG).show()
+                Toast.makeText(context, AuthUtils.getAuthErrorString(resources, e), Toast.LENGTH_LONG).show()
             } catch (e: FirebaseTooManyRequestsException) {
                 Log.d("Login", "Error: ${e.message}")
                 Toast.makeText(context, getString(R.string.auth_error_too_many_requests), Toast.LENGTH_LONG).show()
