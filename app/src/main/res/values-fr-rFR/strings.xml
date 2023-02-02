@@ -13,6 +13,8 @@
 
     <string name="fragment_container">Contien le contenu principal</string>
 
+    <string name="best_sellers"><u>Les meilleurs ventes</u></string>
+
     // Login page
     <string name="login_title">Bienvenue !</string>
     <string name="login_text">Veuillez vous connecter ou créer un compte pour utiliser à l\'application.</string>
@@ -74,5 +76,6 @@
     // Game card
     <string name="gameCover">Image du jeu</string>
     <string name="knowMore">En savoir plus</string>
+    <string name="gamePrice"><u>prix : %s</u></string>
 
 </resources>
