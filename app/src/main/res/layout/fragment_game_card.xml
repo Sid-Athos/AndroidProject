@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/game_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/primary_light"
+    android:visibility="gone"
     android:layout_marginTop="10dp">
     <ImageView
+        android:id="@+id/game_cover"
         android:contentDescription="@string/gameCover"
         android:layout_width="63dp"
         android:layout_height="78dp"
@@ -24,30 +26,32 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="15sp"
-            android:text="Jeu machin"
             android:textColor="@color/white"/>
         <TextView
+            android:id="@+id/game_studio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12sp"
-            android:text="Studio machin"
             android:textColor="@color/white"/>
         <TextView
+            android:id="@+id/game_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12sp"
-            android:text="price : machin$"
             android:textColor="@color/white"
-            android:layout_marginTop="14dp"/>
+            android:layout_marginTop="14dp"
+            android:visibility="gone"/>
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/game_details"
         android:layout_width="100dp"
         android:layout_height="match_parent"
-        android:background="@color/accent"
+        android:background="@drawable/more_button_bg"
         android:gravity="center"
         android:paddingHorizontal="10dp"
-        android:layout_marginStart="10dp">
+        android:layout_marginStart="10dp"
+        android:visibility="gone">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

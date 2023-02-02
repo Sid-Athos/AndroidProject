@@ -1,6 +1,7 @@
 package com.example.androidproject.fragments.auth
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,12 +10,16 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.example.androidproject.R
+import com.example.androidproject.services.AuthService
+import com.example.androidproject.services.LikesService
+import com.example.androidproject.utils.AuthUtils
 import com.example.androidproject.utils.FormsUtils
-import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.FirebaseTooManyRequestsException
+import com.google.firebase.auth.FirebaseAuthException
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
 import kotlinx.coroutines.*
+import java.lang.Exception
 
 class WelcomeFragment : Fragment() {
     private lateinit var emailTV: EditText
@@ -25,12 +30,12 @@ class WelcomeFragment : Fragment() {
     private lateinit var loginButton: Button
     private lateinit var registerButton: Button
 
-    private lateinit var mAuth: FirebaseAuth
+    private lateinit var authService: AuthService
     private lateinit var forgotPassword: TextView
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mAuth = FirebaseAuth.getInstance()
+        authService = AuthService()
 
         initializeUI(view)
 
@@ -60,7 +65,9 @@ class WelcomeFragment : Fragment() {
     @OptIn(DelicateCoroutinesApi::class)
     private fun initLoginButtonBehavior() {
         loginButton.setOnClickListener{
-            GlobalScope.launch { loginUserAccount() }
+            GlobalScope.launch {
+                loginUserAccount()
+            }
         }
     }
 
@@ -77,7 +84,7 @@ class WelcomeFragment : Fragment() {
         if (email.isEmpty()) {
             FormsUtils.fieldSetError(resources, emailTV, getString(R.string.auth_no_email))
             error = true
-        } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+        } else if (!AuthUtils.isEmailValid(email)) {
             FormsUtils.fieldSetError(resources, emailTV, getString(R.string.auth_bad_email))
             error = true
         }
@@ -102,14 +109,21 @@ class WelcomeFragment : Fragment() {
             progressBar.visibility = View.VISIBLE
 
             try {
-                mAuth.signInWithEmailAndPassword(email, password).await()
+                authService.login(email, password)
 
                 Toast.makeText(context, getString(R.string.login_successful), Toast.LENGTH_LONG).show()
 
                 val action: NavDirections = WelcomeFragmentDirections.actionWelcomeFragmentToHomeFragment()
                 findNavController().navigate(action)
+            } catch (e: FirebaseAuthException) {
+                Log.d("Login", "Error: ${e.errorCode} - ${e.message}")
+                Toast.makeText(context, AuthUtils.getAuthErrorString(resources, e), Toast.LENGTH_LONG).show()
+            } catch (e: FirebaseTooManyRequestsException) {
+                Log.d("Login", "Error: ${e.message}")
+                Toast.makeText(context, getString(R.string.auth_error_too_many_requests), Toast.LENGTH_LONG).show()
             } catch (e: Exception) {
-                Toast.makeText(context, e.message, Toast.LENGTH_LONG).show()
+                Log.d("Login", "Error: ${e.message}")
+                Toast.makeText(context, getString(R.string.auth_error_unknown), Toast.LENGTH_LONG).show()
             }
 
             progressBar.visibility = View.INVISIBLE

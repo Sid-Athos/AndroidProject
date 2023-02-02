@@ -13,6 +13,8 @@
 
     <string name="fragment_container">Contain main components</string>
 
+    <string name="best_sellers"><u>The best sellers</u></string>
+
     // Login page
     <string name="login_title">Welcome !</string>
     <string name="login_text">Please login or create an account to use the app.</string>
@@ -43,6 +45,8 @@
     <string name="forgot_password_successful">An email has been sent to you to reset your password</string>
     <string name="forgot_password_failed">An error occurred while trying to reset your password. Please try again later</string>
 
+    <string name="forgot_password_error_user_not_found">This email is not associated with any account.</string>
+
     // Auth related
     <string name="auth_field_username">Username</string>
     <string name="auth_field_email">E-mail</string>
@@ -58,7 +62,17 @@
 
     <string name="auth_passwords_not_matching">Passwords do not match</string>
 
+    // Auth errors
+
+    <string name="auth_error_email_already_in_use">This email is already in use</string>
+    <string name="auth_error_user_not_found">Please check your email or create a new account</string>
+    <string name="auth_error_user_disabled">This user has been disabled</string>
+    <string name="auth_error_wrong_password">Wrong password</string>
+    <string name="auth_error_too_many_requests">Too many requests. Please try again later</string>
+    <string name="auth_error_unknown">An error occurred</string>
+
     // Game card
     <string name="gameCover">Game cover</string>
     <string name="knowMore">Know more</string>
+    <string name="gamePrice"><u>price : %s</u></string>
 </resources>
