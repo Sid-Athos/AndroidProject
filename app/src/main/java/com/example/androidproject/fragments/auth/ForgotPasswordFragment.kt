@@ -50,7 +50,7 @@ class ForgotPasswordFragment : Fragment() {
     }
 
     private suspend fun resetPassword() {
-        return withContext(Dispatchers.IO) {
+        return withContext(Dispatchers.Main) {
             val email = emailTV.text.toString()
 
             if (email.isEmpty()) {
