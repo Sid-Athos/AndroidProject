@@ -1,20 +1,22 @@
 package com.example.androidproject.fragments.auth
 
-import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import com.example.androidproject.MainActivity
+import androidx.fragment.app.Fragment
+import androidx.navigation.NavDirections
+import androidx.navigation.fragment.findNavController
 import com.example.androidproject.R
 import com.example.androidproject.utils.FormsUtils
 import com.google.firebase.auth.FirebaseAuth
 
 
-class RegisterActivity : AppCompatActivity() {
+class RegisterFragment : Fragment() {
     private lateinit var usernameTV: EditText
     private lateinit var emailTV: EditText
 
@@ -26,13 +28,11 @@ class RegisterActivity : AppCompatActivity() {
 
     private lateinit var mAuth: FirebaseAuth
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         mAuth = FirebaseAuth.getInstance()
 
-        initializeUI()
+        initializeUI(view)
 
         regBtn.setOnClickListener { registerNewUser() }
 
@@ -44,6 +44,13 @@ class RegisterActivity : AppCompatActivity() {
 
         FormsUtils.createFieldTextWatcherResetError(emailTV)
         FormsUtils.createFieldTextWatcherResetError(usernameTV)
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_register, container, false)
     }
 
     private fun checkPasswordLength() {
@@ -114,24 +121,24 @@ class RegisterActivity : AppCompatActivity() {
                 progressBar.visibility = View.INVISIBLE
 
                 if (task.isSuccessful) {
-                    Toast.makeText(applicationContext, getString(R.string.register_successful), Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, getString(R.string.register_successful), Toast.LENGTH_LONG).show()
 
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
+//                    val action: NavDirections = RegisterFragmentDirections.actionRegisterFragmentToWelcomeFragment()
+//                    findNavController().navigate(action)
                 } else {
-                    Toast.makeText(applicationContext, getString(R.string.register_failed), Toast.LENGTH_LONG).show()
+                    Toast.makeText(context, getString(R.string.register_failed), Toast.LENGTH_LONG).show()
                 }
             }
     }
 
-    private fun initializeUI() {
-        emailTV = findViewById(R.id.email)
-        usernameTV = findViewById(R.id.username)
+    private fun initializeUI(view: View) {
+        emailTV = view.findViewById(R.id.email)
+        usernameTV = view.findViewById(R.id.username)
 
-        passwordTV = findViewById(R.id.password)
-        cpasswordTV = findViewById(R.id.password_confirm)
+        passwordTV = view.findViewById(R.id.password)
+        cpasswordTV = view.findViewById(R.id.password_confirm)
 
-        regBtn = findViewById(R.id.registerButton)
-        progressBar = findViewById(R.id.progressBar)
+        regBtn = view.findViewById(R.id.registerButton)
+        progressBar = view.findViewById(R.id.progressBar)
     }
 }
