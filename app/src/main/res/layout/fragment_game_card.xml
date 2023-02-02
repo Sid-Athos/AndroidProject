@@ -4,7 +4,7 @@
     android:id="@+id/game_card"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/primary_light"
+    android:visibility="gone"
     android:layout_marginTop="10dp">
     <ImageView
         android:id="@+id/game_cover"
@@ -39,16 +39,19 @@
             android:layout_height="wrap_content"
             android:textSize="12sp"
             android:textColor="@color/white"
-            android:layout_marginTop="14dp"/>
+            android:layout_marginTop="14dp"
+            android:visibility="gone"/>
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/game_details"
         android:layout_width="100dp"
         android:layout_height="match_parent"
-        android:background="@color/accent"
+        android:background="@drawable/more_button_bg"
         android:gravity="center"
         android:paddingHorizontal="10dp"
-        android:layout_marginStart="10dp">
+        android:layout_marginStart="10dp"
+        android:visibility="gone">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

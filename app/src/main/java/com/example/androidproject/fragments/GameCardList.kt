@@ -26,6 +26,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import com.example.androidproject.R
 import com.example.androidproject.models.Game
+import com.google.firebase.annotations.concurrent.Background
 import com.google.gson.JsonElement
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.*
@@ -45,6 +46,7 @@ class GameCardList(private val games: List<String>, private val displayDetails: 
         private val title: TextView
         private val studio: TextView
         private val price: TextView
+        private val detailsButton: LinearLayout
 
         init {
             card = item.findViewById(R.id.game_card)
@@ -52,24 +54,34 @@ class GameCardList(private val games: List<String>, private val displayDetails: 
             title = item.findViewById(R.id.game_title)
             studio = item.findViewById(R.id.game_studio)
             price = item.findViewById(R.id.game_price)
+            detailsButton = item.findViewById(R.id.game_details)
         }
 
-        fun bind(data: Game) {
-            val cardRatio = card.width / card.height
-            val banner = Bitmap.createBitmap(data.cover, 0, data.cover.height/2, data.cover.width, data.cover.width/cardRatio)
-            val bannerDrawable = RoundedBitmapDrawableFactory.create(itemView.resources, banner)
-            bannerDrawable.cornerRadius = 10F
-            bannerDrawable.alpha = 20
-
-            val cardDrawable = ResourcesCompat.getDrawable(itemView.resources, R.drawable.game_card_bg, null)
-            val background = LayerDrawable(arrayOf(cardDrawable, bannerDrawable))
-
-
-            card.background = background
+        fun bind(data: Game, showDetails: Boolean) {
+            bindCoverToBg(data.cover)
             cover.setImageBitmap(data.cover)
             title.text = data.title
             studio.text = data.studio
-            price.text = itemView.resources.getString(R.string.gamePrice, data.price)
+
+            if (showDetails) {
+                price.visibility = View.VISIBLE
+                price.text = itemView.resources.getString(R.string.gamePrice, data.price)
+
+                detailsButton.visibility = View.VISIBLE
+            }
+
+            card.visibility = View.VISIBLE
+        }
+
+        fun bindCoverToBg(cover: Bitmap) {
+            val cardRatio = card.width / card.height
+            val banner = Bitmap.createBitmap(cover, 0, cover.height/2, cover.width, cover.width/cardRatio)
+            val bannerDrawable = RoundedBitmapDrawableFactory.create(itemView.resources, banner)
+            bannerDrawable.cornerRadius = 10F
+            bannerDrawable.alpha = 20
+            val cardDrawable = ResourcesCompat.getDrawable(itemView.resources, R.drawable.game_card_bg, null)
+            val background = LayerDrawable(arrayOf(cardDrawable, bannerDrawable))
+            card.background = background
         }
     }
 
@@ -93,7 +105,7 @@ class GameCardList(private val games: List<String>, private val displayDetails: 
                     data = api.getAppById(gameId).await()
                 }
 
-                holder.bind(Game(gameId, data, imageBitmap))
+                holder.bind(Game(gameId, data, imageBitmap), displayDetails)
             } catch (e: Exception) { Log.e("Game Card Bind:", e.toString()) }
         }
     }

@@ -13,6 +13,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         val recyclerView: RecyclerView = view.findViewById(R.id.game_list_view)
         val games = listOf("10","10","10","10")
-        recyclerView.adapter = GameCardList(games, true)
+        recyclerView.adapter = GameCardList(games, false)
     }
 }
