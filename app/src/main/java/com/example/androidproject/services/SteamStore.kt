@@ -5,7 +5,7 @@ import kotlinx.coroutines.Deferred
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface SteamApiService {
-    @GET("/ISteamChartsService/GetMostPlayedGames/v1/?")
-    fun getMostSelledGames() : Deferred<JsonElement>
+interface SteamStoreService {
+    @GET("/api/appdetails")
+    fun getAppById(@Query("appids") id:String, @Query("l") lang:String = "french") : Deferred<JsonElement>
 }

@@ -8,6 +8,8 @@ data class Game(val id:String, val title:String, val studio:String, val price:St
             this(id,
                 json.asJsonObject.get(id).asJsonObject.get("data").asJsonObject.get("name").asString,
                 json.asJsonObject.get(id).asJsonObject.get("data").asJsonObject.get("publishers").asJsonArray.get(0).asString,
-                json.asJsonObject.get(id).asJsonObject.get("data").asJsonObject.get("price_overview").asJsonObject.get("final_formatted").asString,
+                if(json.asJsonObject.get(id).asJsonObject.get("data").asJsonObject.get("is_free").asBoolean) "free"
+                else if (!json.asJsonObject.get(id).asJsonObject.get("data").asJsonObject.has("price_overview")) "free"
+                else json.asJsonObject.get(id).asJsonObject.get("data").asJsonObject.get("price_overview").asJsonObject.get("final_formatted").asString,
                 cover)
 }
