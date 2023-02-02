@@ -4,9 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.androidproject.fragments.LikesActivity
+import com.example.androidproject.fragments.LikesFragment
 import com.example.androidproject.R
-import com.example.androidproject.fragments.WishlistActivity
+import com.example.androidproject.fragments.WishlistFragment
 import com.example.androidproject.databinding.ActivityHomeBinding
 
 class HomeActivity : AppCompatActivity() {
@@ -25,16 +25,16 @@ class HomeActivity : AppCompatActivity() {
     private fun initLikeButtonBehavior() {
         val likesButton: ImageView = findViewById(R.id.likesButton)
         likesButton.setOnClickListener{
-            val likesActivity = Intent(this, LikesActivity::class.java)
-            startActivity(likesActivity)
+            val likesFragment = Intent(this, LikesFragment::class.java)
+            startActivity(likesFragment)
         }
     }
 
     private fun initWishlistButtonBehavior() {
         val wishlistButton: ImageView = findViewById(R.id.wishlistButton)
         wishlistButton.setOnClickListener{
-            val wishlistActivity = Intent(this, WishlistActivity::class.java)
-            startActivity(wishlistActivity)
+            val wishlistFragment = Intent(this, WishlistFragment::class.java)
+            startActivity(wishlistFragment)
         }
     }
 }

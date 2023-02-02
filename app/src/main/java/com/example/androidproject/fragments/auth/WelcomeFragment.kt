@@ -101,8 +101,8 @@ class WelcomeFragment : Fragment() {
                 if (task.isSuccessful) {
                     Toast.makeText(context, getString(R.string.login_successful), Toast.LENGTH_LONG).show()
 
-//                    val intent = Intent(this@MainActivity, HomeActivity::class.java)
-//                    startActivity(intent)
+                    val action: NavDirections = WelcomeFragmentDirections.actionWelcomeFragmentToHomeFragment()
+                    findNavController().navigate(action)
                 } else {
                     Toast.makeText(context, getString(R.string.login_failed), Toast.LENGTH_LONG).show()
                 }

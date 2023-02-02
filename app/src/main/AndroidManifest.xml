@@ -33,11 +33,11 @@
             android:theme="@style/Theme.AndroidProject.NoActionBar">
         </activity>
         <activity
-            android:name=".fragments.LikesActivity"
+            android:name=".fragments.LikesFragment"
             android:theme="@style/Theme.AndroidProject.NoActionBar">
         </activity>
         <activity
-            android:name=".fragments.WishlistActivity"
+            android:name=".fragments.WishlistFragment"
             android:theme="@style/Theme.AndroidProject.NoActionBar">
         </activity>
     </application>

@@ -19,11 +19,25 @@
         <action android:id="@+id/action_welcomeFragment_to_registerFragment" app:destination="@id/registerFragment"/>
         <action android:id="@+id/action_welcomeFragment_to_forgotPasswordFragment"
                 app:destination="@id/forgotPasswordFragment"/>
+        <action android:id="@+id/action_welcomeFragment_to_homeFragment" app:destination="@id/homeFragment"/>
     </fragment>
     <fragment android:id="@+id/forgotPasswordFragment"
               android:name="com.example.androidproject.fragments.auth.ForgotPasswordFragment"
               android:label="fragment_forgot_password" tools:layout="@layout/fragment_forgot_password">
         <action android:id="@+id/action_forgotPasswordFragment_to_welcomeFragment"
                 app:destination="@id/welcomeFragment"/>
+    </fragment>
+    <fragment android:id="@+id/homeFragment" tools:layout="@layout/fragment_home" android:name="com.example.androidproject.fragments.home.HomeFragment"
+              android:label="HomeFragment">
+        <action android:id="@+id/action_homeFragment_to_likesFragment" app:destination="@id/likesFragment"/>
+        <action android:id="@+id/action_homeFragment_to_wishlistFragment" app:destination="@id/wishlistFragment"/>
+    </fragment>
+    <fragment tools:layout="@layout/fragment_likes" android:id="@+id/likesFragment" android:name="com.example.androidproject.fragments.LikesFragment"
+              android:label="LikesFragment">
+        <action android:id="@+id/action_likesFragment_to_homeFragment" app:destination="@id/homeFragment"/>
+    </fragment>
+    <fragment tools:layout="@layout/fragment_wishlist" android:id="@+id/wishlistFragment" android:name="com.example.androidproject.fragments.WishlistFragment"
+              android:label="WishlistFragment">
+        <action android:id="@+id/action_wishlistFragment_to_homeFragment" app:destination="@id/homeFragment"/>
     </fragment>
 </navigation>
