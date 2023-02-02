@@ -49,6 +49,7 @@ class GameCardList(private val games: List<String>, private val displayDetails: 
             detailsButton = item.findViewById(R.id.game_details)
         }
 
+        @OptIn(DelicateCoroutinesApi::class)
         fun bind(data: Game, showDetails: Boolean) {
             GlobalScope.launch {
                 Log.v("game list cover", data.coverUrl.toString())

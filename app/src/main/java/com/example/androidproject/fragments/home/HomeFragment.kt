@@ -26,6 +26,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
 
         val recyclerView: RecyclerView = view.findViewById(R.id.game_list_view)
+        val mostPlayedGame: MostPlayedGame = childFragmentManager.findFragmentById(R.id.most_played_game) as MostPlayedGame
+
         GlobalScope.launch(Dispatchers.Main) {
             try {
                 val response = api.getMostSelledGames().await()
@@ -35,6 +37,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     .take(30)
                     .map { rank -> rank.asJsonObject.get("appid").toString() }
                 recyclerView.adapter = GameCardList(games, true, this@HomeFragment)
+                mostPlayedGame.bind(games.get(0))
             } catch (e: Exception) { Log.e("Game Card Bind:", e.toString()) }
         }
     }

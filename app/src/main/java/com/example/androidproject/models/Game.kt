@@ -4,9 +4,10 @@ import android.graphics.Bitmap
 import com.google.gson.JsonElement
 import java.net.URL
 
-data class Game(val id:String, val title:String, val studio:String, val price:String, val coverUrl: URL, val backgroundUrl: URL ) {
+data class Game(val id:String, val title:String, val shortDescription: String, val studio:String, val price:String, val coverUrl: URL, val backgroundUrl: URL ) {
     constructor(id:String, json: JsonElement): this(id,
         json.asJsonObject.get(id).asJsonObject.get("data").asJsonObject.get("name").asString,
+        json.asJsonObject.get(id).asJsonObject.get("data").asJsonObject.get("short_description").asString,
         json.asJsonObject.get(id).asJsonObject.get("data").asJsonObject.get("publishers").asJsonArray.get(0).asString,
         if(json.asJsonObject.get(id).asJsonObject.get("data").asJsonObject.get("is_free").asBoolean) "free"
         else if (!json.asJsonObject.get(id).asJsonObject.get("data").asJsonObject.has("price_overview")) "free"
