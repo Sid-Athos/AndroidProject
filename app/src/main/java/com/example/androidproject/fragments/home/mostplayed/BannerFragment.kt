@@ -1,10 +1,9 @@
-package com.example.androidproject.fragments.home
+package com.example.androidproject.fragments.home.mostplayed
 
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
-import android.graphics.drawable.Drawable
 import android.graphics.drawable.LayerDrawable
 import android.view.View
 import android.widget.ImageView
@@ -12,7 +11,6 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentContainer
 import com.example.androidproject.MainActivity
 import com.example.androidproject.R
 import com.example.androidproject.models.Game
@@ -23,7 +21,7 @@ import kotlinx.coroutines.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-class MostPlayedGame: Fragment(R.layout.fragment_most_played_game) {
+class BannerFragment: Fragment(R.layout.fragment_most_played_banner) {
     private val api = Retrofit.Builder()
         .baseUrl("https://store.steampowered.com/")
         .addConverterFactory(GsonConverterFactory.create())
