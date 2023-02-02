@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
 import com.example.androidproject.R
+import com.example.androidproject.utils.AuthUtils
 import com.example.androidproject.utils.FormsUtils
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.*
@@ -24,6 +25,7 @@ class ForgotPasswordFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         mAuth = FirebaseAuth.getInstance()
+        mAuth.useAppLanguage()
 
         initializeUI(view)
 
@@ -58,7 +60,7 @@ class ForgotPasswordFragment : Fragment() {
                 return@withContext
             }
 
-            if (!android.util.Patterns.EMAIL_ADDRESS.matcher(emailTV.text).matches()) {
+            if (!AuthUtils.isEmailValid(emailTV.text.toString())) {
                 FormsUtils.fieldSetError(resources, emailTV, getString(R.string.auth_bad_email))
                 return@withContext
             }

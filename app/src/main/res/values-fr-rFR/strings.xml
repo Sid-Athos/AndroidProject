@@ -58,6 +58,17 @@
 
     <string name="auth_passwords_not_matching">Les mots de passe ne correspondent pas</string>
 
+    // Auth errors
+
+    <string name="auth_error_email_already_in_use">Cet email est déjà utilisé</string>
+    <string name="auth_error_user_not_found">
+        Veuillez vérifier votre e-mail ou créer un nouveau compte
+    </string>
+    <string name="auth_error_user_disabled">Cet utilisateur a été désactivé</string>
+    <string name="auth_error_wrong_password">Mot de passe incorrect</string>
+    <string name="auth_error_too_many_requests">Trop de requêtes. Veuillez réessayer plus tard</string>
+    <string name="auth_error_unknown">Une erreur est survenue</string>
+
     // Game card
     <string name="gameCover">Image du jeu</string>
     <string name="knowMore">En savoir plus</string>

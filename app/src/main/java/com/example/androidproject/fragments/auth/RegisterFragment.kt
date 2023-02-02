@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.example.androidproject.R
+import com.example.androidproject.utils.AuthUtils
 import com.example.androidproject.utils.FormsUtils
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.UserProfileChangeRequest
@@ -91,7 +92,7 @@ class RegisterFragment : Fragment() {
         if (emailTV.text.isEmpty()) {
             FormsUtils.fieldSetError(resources, emailTV, getString(R.string.auth_no_email))
             error = true
-        } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(emailTV.text).matches()) {
+        } else if (!AuthUtils.isEmailValid(emailTV.text.toString())) {
             FormsUtils.fieldSetError(resources, emailTV, getString(R.string.auth_bad_email))
             error = true
         }

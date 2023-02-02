@@ -58,6 +58,15 @@
 
     <string name="auth_passwords_not_matching">Passwords do not match</string>
 
+    // Auth errors
+
+    <string name="auth_error_email_already_in_use">This email is already in use</string>
+    <string name="auth_error_user_not_found">Please check your email or create a new account</string>
+    <string name="auth_error_user_disabled">This user has been disabled</string>
+    <string name="auth_error_wrong_password">Wrong password</string>
+    <string name="auth_error_too_many_requests">Too many requests. Please try again later</string>
+    <string name="auth_error_unknown">An error occurred</string>
+
     // Game card
     <string name="gameCover">Game cover</string>
     <string name="knowMore">Know more</string>
