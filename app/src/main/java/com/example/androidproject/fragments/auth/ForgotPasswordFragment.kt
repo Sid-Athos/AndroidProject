@@ -6,11 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavDirections
-import androidx.navigation.fragment.findNavController
 import com.example.androidproject.R
 import com.example.androidproject.utils.FormsUtils
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.coroutines.*
+import kotlinx.coroutines.tasks.await
 
 class ForgotPasswordFragment : Fragment() {
     private lateinit var emailTV: EditText
@@ -39,39 +39,41 @@ class ForgotPasswordFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_forgot_password, container, false)
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
     private fun initSubmitButtonBehavior() {
         val registerButton: Button = submitButton.findViewById(R.id.submitButton)
-        registerButton.setOnClickListener{ resetPassword() }
+        registerButton.setOnClickListener{
+            GlobalScope.launch(Dispatchers.Main) {
+                resetPassword()
+            }
+        }
     }
 
-    private fun resetPassword() {
-        val email = emailTV.text.toString()
+    private suspend fun resetPassword() {
+        return withContext(Dispatchers.IO) {
+            val email = emailTV.text.toString()
 
-        if (email.isEmpty()) {
-            FormsUtils.fieldSetError(resources, emailTV, getString(R.string.auth_no_email))
-            return
-        }
-
-        if (!android.util.Patterns.EMAIL_ADDRESS.matcher(emailTV.text).matches()) {
-            FormsUtils.fieldSetError(resources, emailTV, getString(R.string.auth_bad_email))
-            return
-        }
-
-        progressBar.visibility = View.VISIBLE
-
-        mAuth.sendPasswordResetEmail(email)
-            .addOnCompleteListener { task ->
-                progressBar.visibility = View.INVISIBLE
-
-                if (task.isSuccessful) {
-                    Toast.makeText(context, getString(R.string.forgot_password_successful), Toast.LENGTH_LONG).show()
-
-                    val action: NavDirections = ForgotPasswordFragmentDirections.actionForgotPasswordFragmentToWelcomeFragment()
-                    findNavController().navigate(action)
-                } else {
-                    Toast.makeText(context, getString(R.string.forgot_password_failed), Toast.LENGTH_LONG).show()
-                }
+            if (email.isEmpty()) {
+                FormsUtils.fieldSetError(resources, emailTV, getString(R.string.auth_no_email))
+                return@withContext
             }
+
+            if (!android.util.Patterns.EMAIL_ADDRESS.matcher(emailTV.text).matches()) {
+                FormsUtils.fieldSetError(resources, emailTV, getString(R.string.auth_bad_email))
+                return@withContext
+            }
+
+            progressBar.visibility = View.VISIBLE
+
+            try {
+                mAuth.sendPasswordResetEmail(email).await()
+                Toast.makeText(context, getString(R.string.forgot_password_successful), Toast.LENGTH_LONG).show()
+            } catch (e: Exception) {
+                Toast.makeText(context, getString(R.string.forgot_password_failed), Toast.LENGTH_LONG).show()
+            }
+
+            progressBar.visibility = View.INVISIBLE
+        }
     }
 
     private fun initializeUI(view: View) {
