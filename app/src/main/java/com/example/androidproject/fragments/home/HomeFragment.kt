@@ -26,7 +26,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         super.onViewCreated(view, savedInstanceState)
 
         val recyclerView: RecyclerView = view.findViewById(R.id.game_list_view)
-
         GlobalScope.launch(Dispatchers.Main) {
             try {
                 val response = api.getMostSelledGames().await()
