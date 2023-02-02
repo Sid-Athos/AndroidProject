@@ -15,14 +15,14 @@ import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidproject.MainActivity
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import com.example.androidproject.R
 import com.example.androidproject.models.Game
 import com.example.androidproject.services.SteamStoreService
 import com.google.gson.JsonElement
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.*
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 class GameCardList(private val games: List<String>, private val displayDetails: Boolean, private val parent: Fragment): RecyclerView.Adapter<GameCardList.ViewHolder>() {
     private val api = Retrofit.Builder()
