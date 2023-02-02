@@ -1,13 +1,24 @@
 package com.example.androidproject.fragments
 
+import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.BitmapShader
+import android.graphics.Color
+import android.graphics.ColorFilter
+import android.graphics.Shader
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.LayerDrawable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.graphics.drawable.RoundedBitmapDrawable
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidproject.services.SteamApiService
@@ -28,25 +39,37 @@ class GameCardList(private val games: List<String>, private val displayDetails: 
         .build()
         .create(SteamApiService::class.java)
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val coverView: ImageView
-        private val titleView: TextView
-        private val studioNameView: TextView
-        private val priceView: TextView
+    class ViewHolder(item: View) : RecyclerView.ViewHolder(item) {
+        private val card: LinearLayout
+        private val cover: ImageView
+        private val title: TextView
+        private val studio: TextView
+        private val price: TextView
 
         init {
-            coverView = itemView.findViewById(R.id.game_cover)
-            titleView = itemView.findViewById(R.id.game_title)
-            studioNameView = itemView.findViewById(R.id.game_studio_name)
-            priceView = itemView.findViewById(R.id.game_price)
+            card = item.findViewById(R.id.game_card)
+            cover = item.findViewById(R.id.game_cover)
+            title = item.findViewById(R.id.game_title)
+            studio = item.findViewById(R.id.game_studio)
+            price = item.findViewById(R.id.game_price)
         }
 
         fun bind(data: Game) {
-            coverView.setImageBitmap(data.cover)
-            titleView.text = data.title
-            studioNameView.text = data.studio
-            priceView.text = itemView.resources.getString(R.string.gamePrice, data.price)
-            Log.v("Game Card Bind:", data.cover.toString())
+            val cardRatio = card.width / card.height
+            val banner = Bitmap.createBitmap(data.cover, 0, data.cover.height/2, data.cover.width, data.cover.width/cardRatio)
+            val bannerDrawable = RoundedBitmapDrawableFactory.create(itemView.resources, banner)
+            bannerDrawable.cornerRadius = 10F
+            bannerDrawable.alpha = 20
+
+            val cardDrawable = ResourcesCompat.getDrawable(itemView.resources, R.drawable.game_card_bg, null)
+            val background = LayerDrawable(arrayOf(cardDrawable, bannerDrawable))
+
+
+            card.background = background
+            cover.setImageBitmap(data.cover)
+            title.text = data.title
+            studio.text = data.studio
+            price.text = itemView.resources.getString(R.string.gamePrice, data.price)
         }
     }
 
