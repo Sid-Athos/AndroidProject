@@ -112,28 +112,28 @@ class RegisterFragment : Fragment() {
     }
 
     private suspend fun registerNewUser() {
-        val email = emailTV.text.toString()
-        val password = passwordTV.text.toString()
+        return withContext(Dispatchers.Main) {
+            val email = emailTV.text.toString()
+            val password = passwordTV.text.toString()
 
-        if (checkForErrors()) {
-            return
-        }
+            if (checkForErrors()) {
+                return@withContext
+            }
 
-        progressBar.visibility = View.VISIBLE
+            progressBar.visibility = View.VISIBLE
 
-        val registerResult = mAuth.createUserWithEmailAndPassword(email, password).await()
+            try {
+                mAuth.createUserWithEmailAndPassword(email, password).await()
 
-        withContext(Dispatchers.Main) {
-            progressBar.visibility = View.INVISIBLE
-
-            if (registerResult.user != null) {
                 Toast.makeText(context, getString(R.string.register_successful), Toast.LENGTH_LONG).show()
 
                 val action: NavDirections = RegisterFragmentDirections.actionRegisterFragmentToWelcomeFragment()
                 findNavController().navigate(action)
-            } else {
-                Toast.makeText(context, getString(R.string.register_failed), Toast.LENGTH_LONG).show()
+            } catch (e: Exception) {
+                Toast.makeText(context, e.message, Toast.LENGTH_LONG).show()
             }
+
+            progressBar.visibility = View.INVISIBLE
         }
     }
 
