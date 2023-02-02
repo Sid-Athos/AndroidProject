@@ -6,6 +6,7 @@
     android:background="@color/primary_light"
     android:layout_marginTop="10dp">
     <ImageView
+        android:id="@+id/game_cover"
         android:contentDescription="@string/gameCover"
         android:layout_width="63dp"
         android:layout_height="78dp"
