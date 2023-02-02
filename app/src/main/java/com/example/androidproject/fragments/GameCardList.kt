@@ -1,13 +1,7 @@
 package com.example.androidproject.fragments
 
-import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.BitmapShader
-import android.graphics.Color
-import android.graphics.ColorFilter
-import android.graphics.Shader
-import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.LayerDrawable
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,23 +11,18 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
-import androidx.core.graphics.drawable.RoundedBitmapDrawable
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import androidx.fragment.app.Fragment
-
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidproject.MainActivity
-import com.example.androidproject.services.SteamApiService
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import com.example.androidproject.R
 import com.example.androidproject.models.Game
 import com.example.androidproject.services.SteamStoreService
-import com.google.firebase.annotations.concurrent.Background
 import com.google.gson.JsonElement
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.*
-import java.net.URL
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class GameCardList(private val games: List<String>, private val displayDetails: Boolean, private val parent: Fragment): RecyclerView.Adapter<GameCardList.ViewHolder>() {
     private val api = Retrofit.Builder()
@@ -61,8 +50,16 @@ class GameCardList(private val games: List<String>, private val displayDetails: 
         }
 
         fun bind(data: Game, showDetails: Boolean) {
-            bindCoverToBg(data.cover)
-            cover.setImageBitmap(data.cover)
+            GlobalScope.launch {
+                Log.v("game list cover", data.coverUrl.toString())
+                val coverBitmap = BitmapFactory.decodeStream(withContext(Dispatchers.IO) {
+                    data.coverUrl.openStream()
+                })
+                withContext(Dispatchers.Main){
+                    bindCoverToBg(coverBitmap)
+                    cover.setImageBitmap(coverBitmap)
+                }
+            }
             title.text = data.title
             studio.text = data.studio
 
@@ -96,24 +93,20 @@ class GameCardList(private val games: List<String>, private val displayDetails: 
     @OptIn(DelicateCoroutinesApi::class)
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val gameId = games[position]
-        val coverUrl = URL("https://steamcdn-a.akamaihd.net/steam/apps/$gameId/library_600x900.jpg")
-
         val game = (parent.requireActivity() as MainActivity).cache[gameId]
 
         if (game == null) {
             GlobalScope.launch(Dispatchers.Main) {
                 val data: JsonElement
-                val imageBitmap: Bitmap
                 withContext(Dispatchers.IO) {
                     data = api.getAppById(gameId).await()
-                    imageBitmap = BitmapFactory.decodeStream(coverUrl.openStream())
                 }
 
-                Log.v("id gaame list", gameId)
-
-                val newGame = Game(gameId, data, imageBitmap)
-                (parent.requireActivity() as MainActivity).cache[gameId] = newGame
-                holder.bind(newGame, displayDetails)
+                if (data.asJsonObject.get(gameId).asJsonObject.get("success").asBoolean) {
+                    val newGame = Game(gameId, data)
+                    (parent.requireActivity() as MainActivity).cache[gameId] = newGame
+                    holder.bind(newGame, displayDetails)
+                }
             }
         } else holder.bind(game, displayDetails)
     }
