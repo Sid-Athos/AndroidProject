@@ -10,10 +10,10 @@ import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
-import androidx.navigation.fragment.findNavController
 import com.example.androidproject.R
 import com.example.androidproject.utils.FormsUtils
 import com.google.firebase.auth.FirebaseAuth
+import androidx.navigation.fragment.findNavController
 
 
 class RegisterFragment : Fragment() {
@@ -123,8 +123,8 @@ class RegisterFragment : Fragment() {
                 if (task.isSuccessful) {
                     Toast.makeText(context, getString(R.string.register_successful), Toast.LENGTH_LONG).show()
 
-//                    val action: NavDirections = RegisterFragmentDirections.actionRegisterFragmentToWelcomeFragment()
-//                    findNavController().navigate(action)
+                    val action: NavDirections = RegisterFragmentDirections.actionRegisterFragmentToWelcomeFragment()
+                    findNavController().navigate(action)
                 } else {
                     Toast.makeText(context, getString(R.string.register_failed), Toast.LENGTH_LONG).show()
                 }
