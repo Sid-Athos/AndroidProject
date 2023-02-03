@@ -31,7 +31,7 @@ class LikesFragment: Fragment() {
             try {
                 val games = likesService.list()
                 withContext(Dispatchers.Main) {
-                    recyclerView.adapter = GameCardList(games, true, this@LikesFragment)
+                    recyclerView.adapter = GameCardList(games, R.id.go_to_details, this@LikesFragment)
                 }
             } catch (e: Exception) { Log.e("Game Card Bind:", e.toString()) }
         }

@@ -30,7 +30,7 @@ class WishlistFragment : Fragment() {
             try {
                 val games = wishlistService.list()
                 withContext(Dispatchers.Main) {
-                    recyclerView.adapter = GameCardList(games, true, this@WishlistFragment)
+                    recyclerView.adapter = GameCardList(games, R.id.go_to_details3, this@WishlistFragment)
                 }
             } catch (e: Exception) { Log.e("Game Card Bind:", e.toString()) }
         }

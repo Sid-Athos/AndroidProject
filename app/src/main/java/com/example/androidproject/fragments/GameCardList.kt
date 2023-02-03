@@ -13,6 +13,7 @@ import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidproject.MainActivity
 import retrofit2.Retrofit
@@ -24,7 +25,7 @@ import com.google.gson.JsonElement
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.*
 
-class GameCardList(private val games: List<String>, private val displayDetails: Boolean, private val parent: Fragment): RecyclerView.Adapter<GameCardList.ViewHolder>() {
+class GameCardList(private val games: List<String>, private val detailsActionId: Int, private val parent: Fragment): RecyclerView.Adapter<GameCardList.ViewHolder>() {
     private val api = Retrofit.Builder()
         .baseUrl("https://store.steampowered.com/")
         .addConverterFactory(GsonConverterFactory.create())
@@ -50,10 +51,8 @@ class GameCardList(private val games: List<String>, private val displayDetails: 
         }
 
         @OptIn(DelicateCoroutinesApi::class)
-        fun bind(data: Game, showDetails: Boolean) {
+        fun bind(data: Game, detailsActionId: Int, parent: Fragment) {
             GlobalScope.launch(Dispatchers.IO) {
-                Log.v("game list cover", data.coverUrl.toString())
-
                 try {
                     val coverBitmap = BitmapFactory.decodeStream(data.coverUrl.openStream())
 
@@ -67,12 +66,10 @@ class GameCardList(private val games: List<String>, private val displayDetails: 
             }
             title.text = data.title
             studio.text = data.studio
-
-            if (showDetails) {
-                price.visibility = View.VISIBLE
-                price.text = itemView.resources.getString(R.string.gamePrice, data.price)
-
-                detailsButton.visibility = View.VISIBLE
+            price.text = itemView.resources.getString(R.string.gamePrice, data.price)
+            detailsButton.setOnClickListener {
+                val navController = parent.findNavController()
+                navController.navigate(detailsActionId)
             }
 
             card.visibility = View.VISIBLE
@@ -111,14 +108,14 @@ class GameCardList(private val games: List<String>, private val displayDetails: 
                         (parent.requireActivity() as MainActivity).cache[gameId] = newGame
 
                         withContext(Dispatchers.Main) {
-                            holder.bind(newGame, displayDetails)
+                            holder.bind(newGame, detailsActionId, parent)
                         }
                     }
                 } catch (e: Exception) {
                     Log.e("game list", "error getting game data", e)
                 }
             }
-        } else holder.bind(game, displayDetails)
+        } else holder.bind(game, detailsActionId, parent)
     }
 
     override fun getItemCount(): Int {
