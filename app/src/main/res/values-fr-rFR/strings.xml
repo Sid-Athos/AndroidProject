@@ -14,7 +14,10 @@
     <string name="fragment_container">Contien le contenu principal</string>
 
     <string name="best_sellers"><u>Les meilleurs ventes</u></string>
-    <string name="search_games">Rechercher un jeu...</string>
+    <string name="search_games">Rechercher un jeu…</string>
+
+    <string name="empty_wishes">Vous n’avez encore pas liké de contenu. Cliquez sur l’étoile pour en rajouter.</string>
+    <string name="empty_likes">Vous n’avez encore pas liké de contenu. Cliquez sur le coeur pour en rajouter.</string>
 
     // Login page
     <string name="login_title">Bienvenue !</string>

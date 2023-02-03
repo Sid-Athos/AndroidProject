@@ -16,7 +16,15 @@
     <string name="best_sellers">
         <u>The best sellers</u>
     </string>
-    <string name="search_games">Search Games...</string>
+    <string name="search_games">Search Games…</string>
+
+    <string name="empty_wishes">
+        You have no likes yet. You can add games to your likes by clicking on the heart icon on the game page.
+    </string>
+
+    <string name="empty_likes">
+        You have no likes yet. You can add games to your likes by clicking on the heart icon on the game page.
+    </string>
 
     // Login page
     <string name="login_title">Welcome !</string>
