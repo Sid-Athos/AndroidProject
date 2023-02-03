@@ -27,7 +27,6 @@ class Search: Fragment(R.layout.fragment_search) {
             val games = response.asJsonArray.map { app -> app.asJsonObject.get("appid").asString }
             Log.v("home fragment input", games.toString())
             withContext(Dispatchers.Main) {
-
                 recyclerView.adapter = GameCardList(games, R.id.go_to_details2, this@Search)
             }
         }
