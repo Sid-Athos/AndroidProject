@@ -34,6 +34,12 @@ class GameDetailsFragment: Fragment(R.layout.fragment_game_details) {
     private val likesService = LikesService()
     private val wishlistService = WishlistService()
 
+    private var liked = false
+    private var inWishlist = false
+
+    private lateinit var likeButton: AppCompatImageView
+    private lateinit var wishlistButton: AppCompatImageView
+
     private val api = Retrofit.Builder()
         .baseUrl("https://store.steampowered.com/")
         .addConverterFactory(GsonConverterFactory.create())
@@ -46,29 +52,57 @@ class GameDetailsFragment: Fragment(R.layout.fragment_game_details) {
         super.onViewCreated(view, savedInstanceState)
 
         val returnButton: AppCompatImageView = requireView().findViewById(R.id.backButton)
-        val likeButton: AppCompatImageView = requireView().findViewById(R.id.likesButton)
-        val wishlistButton: AppCompatImageView = requireView().findViewById(R.id.wishlistButton)
+        likeButton = requireView().findViewById(R.id.likesButton)
+        wishlistButton = requireView().findViewById(R.id.wishlistButton)
 
         val gameId = arguments?.getString("gameId") ?: "10"
         val game = (requireActivity() as MainActivity).cache[gameId]
 
+        GlobalScope.launch(Dispatchers.IO) {
+            val likes = likesService.list()
+            val wishlist = wishlistService.list()
+
+            withContext(Dispatchers.Main) {
+                liked = likes.contains(gameId)
+                inWishlist = wishlist.contains(gameId)
+
+                checkState()
+            }
+        }
+
 
         likeButton.setOnClickListener {
             GlobalScope.launch(Dispatchers.IO) {
-                likesService.add(gameId)
-
-                withContext(Dispatchers.Main) {
-                    Toast.makeText(requireContext(), getString(R.string.game_details_add_to_likes), Toast.LENGTH_SHORT).show()
+                if (liked) {
+                    likesService.remove(gameId)
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(requireContext(), getString(R.string.game_details_remove_from_likes), Toast.LENGTH_SHORT).show()
+                        checkState()
+                    }
+                } else {
+                    likesService.add(gameId)
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(requireContext(), getString(R.string.game_details_add_to_likes), Toast.LENGTH_SHORT).show()
+                        checkState()
+                    }
                 }
             }
         }
 
         wishlistButton.setOnClickListener {
             GlobalScope.launch(Dispatchers.IO) {
-                wishlistService.add(gameId)
-
-                withContext(Dispatchers.Main) {
-                    Toast.makeText(requireContext(), getString(R.string.game_details_add_to_wishlist), Toast.LENGTH_SHORT).show()
+                if (inWishlist) {
+                    wishlistService.remove(gameId)
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(requireContext(), getString(R.string.game_details_remove_from_wishlist), Toast.LENGTH_SHORT).show()
+                        checkState()
+                    }
+                } else {
+                    wishlistService.add(gameId)
+                    withContext(Dispatchers.Main) {
+                        Toast.makeText(requireContext(), getString(R.string.game_details_add_to_wishlist), Toast.LENGTH_SHORT).show()
+                        checkState()
+                    }
                 }
             }
         }
@@ -98,6 +132,19 @@ class GameDetailsFragment: Fragment(R.layout.fragment_game_details) {
                 }
             }
         } else bind(game)
+    }
+
+    private fun checkState() {
+        if (liked) {
+            likeButton.setImageResource(R.drawable.like_full)
+        } else {
+            likeButton.setImageResource(R.drawable.like)
+        }
+        if (inWishlist) {
+            wishlistButton.setImageResource(R.drawable.whishlist_full)
+        } else {
+            wishlistButton.setImageResource(R.drawable.wishlist)
+        }
     }
 
     private fun bind(game: Game) {
