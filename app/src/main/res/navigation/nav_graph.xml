@@ -55,12 +55,20 @@
         <action android:id="@+id/action_likesFragment_to_homeFragment" app:destination="@id/homeFragment"
                 app:enterAnim="@anim/nav_default_enter_anim" app:exitAnim="@anim/nav_default_exit_anim"
                 app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        <action
+            android:id="@+id/action_likesFragment_to_gameDetailsFragment"
+            app:destination="@id/gameDetailsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim" />
     </fragment>
     <fragment tools:layout="@layout/fragment_wishlist" android:id="@+id/wishlistFragment" android:name="com.example.androidproject.fragments.WishlistFragment"
               android:label="WishlistFragment">
         <action android:id="@+id/action_wishlistFragment_to_homeFragment" app:destination="@id/homeFragment"
                 app:enterAnim="@anim/nav_default_enter_anim" app:exitAnim="@anim/nav_default_exit_anim"
                 app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        <action
+            android:id="@+id/action_wishlistFragment_to_gameDetailsFragment"
+            app:destination="@id/gameDetailsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim" />
     </fragment>
     <fragment tools:layout="@layout/fragment_game_details" android:id="@+id/gameDetailsFragment" android:name="com.example.androidproject.fragments.gamedetails.GameDetailsFragment"
         android:label="GameDetailsFragment">
@@ -72,5 +80,15 @@
             app:argType="string" />
         <argument android:name="gameCover" />
         <argument android:name="gameBackground" />
+        <action
+            android:id="@+id/action_gameDetailsFragment_to_likesFragment"
+            app:destination="@id/likesFragment"
+            app:enterAnim="@anim/nav_default_enter_anim" />
+        <action
+            android:id="@+id/action_gameDetailsFragment_to_wishlistFragment"
+            app:destination="@id/wishlistFragment" />
+        <argument
+            android:name="origin"
+            app:argType="string" />
     </fragment>
 </navigation>
