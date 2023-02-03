@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/most_played_game"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:name="com.example.androidproject.fragments.home.mostplayed.BannerFragment"
+        tools:layout="@layout/fragment_most_played_banner"
+        android:layout_marginBottom="20dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="@string/best_sellers"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:fontFamily="@font/proxima_nova_regular" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/game_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="10dp"
+        android:paddingBottom="10dp"
+        android:layoutAnimation="@anim/layout_animation"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+</LinearLayout>
