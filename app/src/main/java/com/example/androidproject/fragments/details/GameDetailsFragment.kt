@@ -58,7 +58,7 @@ class GameDetailsFragment: Fragment(R.layout.fragment_game_details) {
                 likesService.add(gameId)
 
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(requireContext(), "Liked", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), getString(R.string.game_details_add_to_likes), Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -68,7 +68,7 @@ class GameDetailsFragment: Fragment(R.layout.fragment_game_details) {
                 wishlistService.add(gameId)
 
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(requireContext(), "Added to wishlist", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), getString(R.string.game_details_add_to_wishlist), Toast.LENGTH_SHORT).show()
                 }
             }
         }
