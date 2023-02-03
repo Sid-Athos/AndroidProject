@@ -1,11 +1,20 @@
 package com.example.androidproject.fragments.details
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import androidx.fragment.app.Fragment
 import com.example.androidproject.MainActivity
 import com.example.androidproject.R
@@ -58,5 +67,33 @@ class GameDetailsFragment: Fragment(R.layout.fragment_game_details) {
         requireView().findViewById<TextView>(R.id.title).text = game.title
         requireView().findViewById<TextView>(R.id.studio).text = game.studio
         requireView().findViewById<TextView>(R.id.description).text = game.shortDescription
+
+        GlobalScope.launch {
+            val backgroundBitmap = BitmapFactory.decodeStream(withContext(Dispatchers.IO) { game.backgroundUrl.openStream() })
+            val coverBitmap = BitmapFactory.decodeStream(withContext(Dispatchers.IO) { game.coverUrl.openStream() })
+
+            withContext(Dispatchers.Main){
+                requireView().findViewById<ImageView>(R.id.banner).background = prepareBannerBg(backgroundBitmap)
+                requireView().findViewById<ImageView>(R.id.cover).background = BitmapDrawable(resources, coverBitmap)
+                val card: LinearLayout = requireView().findViewById(R.id.card)
+                card.background = prepareCardBg(card.height, card.width, coverBitmap)
+            }
+        }
+    }
+
+    private fun prepareBannerBg(banner: Bitmap): LayerDrawable {
+        val background = BitmapDrawable(resources, banner)
+        val shadow = ResourcesCompat.getDrawable(resources, R.drawable.darken_shadow, null)
+        return LayerDrawable(arrayOf(background, shadow))
+    }
+
+    private fun prepareCardBg(height: Int, width: Int, cover: Bitmap): LayerDrawable {
+        val cardRatio = width / height
+        val banner = Bitmap.createBitmap(cover, 0, cover.height/2, cover.width, cover.width/cardRatio)
+        val bannerDrawable = RoundedBitmapDrawableFactory.create(resources, banner)
+        bannerDrawable.cornerRadius = 10F
+        bannerDrawable.alpha = 40
+        val cardDrawable = ResourcesCompat.getDrawable(resources, R.drawable.game_card_bg, null)
+        return LayerDrawable(arrayOf(cardDrawable, bannerDrawable))
     }
 }

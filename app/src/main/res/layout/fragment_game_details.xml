@@ -1,18 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <TextView
-        android:id="@+id/title"
+    android:layout_height="match_parent"
+    android:background="@color/primary">
+    <ImageView
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/banner"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:id="@+id/studio"
+        android:layout_height="300dp"/>
+
+    <LinearLayout
+        app:layout_constraintTop_toBottomOf="@id/banner"
+        android:id="@+id/card"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="110dp"
+        android:orientation="horizontal"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="-55dp"
+        android:padding="10dp"
+        android:elevation="10dp">
+        <ImageView
+            android:id="@+id/cover"
+            android:layout_width="64dp"
+            android:layout_height="match_parent"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginStart="20dp"
+            android:gravity="center_vertical">
+            <TextView
+                android:id="@+id/title"
+                android:textSize="15sp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/proxima_nova_regular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/studio"
+                android:textSize="12sp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/proxima_nova_regular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/description_switch"
+        app:layout_constraintTop_toBottomOf="@id/card"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/switch_bg"
+        android:orientation="horizontal"
+        android:layout_margin="20dp">
+        
+    </LinearLayout>
+
     <TextView
+        app:layout_constraintTop_toBottomOf="@id/description_switch"
         android:id="@+id/description"
+        android:textSize="15sp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/proxima_nova_regular"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-</LinearLayout>
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
