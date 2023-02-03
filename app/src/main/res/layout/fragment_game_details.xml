@@ -55,8 +55,28 @@
         android:layout_height="50dp"
         android:background="@drawable/switch_bg"
         android:orientation="horizontal"
-        android:layout_margin="20dp">
-        
+        android:layout_margin="20dp"
+        android:padding="2dp">
+        <Button
+            android:id="@+id/showDescription"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/proxima_nova_regular"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="@string/description"
+            android:background="@drawable/switch_left_button_bg"/>
+        <Button
+            android:id="@+id/showReviews"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/proxima_nova_regular"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="@string/reviews"
+            android:background="@drawable/switch_right_button_bg"/>
     </LinearLayout>
 
     <TextView
