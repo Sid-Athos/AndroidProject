@@ -79,4 +79,7 @@
     <string name="knowMore">En savoir plus</string>
     <string name="gamePrice"><u>prix : %s</u></string>
 
+    <string name="games_details_title">
+        Détails du jeu
+    </string>
 </resources>
