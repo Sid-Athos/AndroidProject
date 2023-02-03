@@ -6,14 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidproject.R
 import com.example.androidproject.services.LikesService
-import com.google.android.material.textview.MaterialTextView
 import kotlinx.coroutines.*
 
 
@@ -28,25 +26,12 @@ class LikesFragment: Fragment() {
         initBackButton(view)
 
         val recyclerView: RecyclerView = view.findViewById(R.id.likes_list_view)
-        val progressBar = view.findViewById<ProgressBar>(R.id.likes_progress_bar)
 
         GlobalScope.launch(Dispatchers.IO) {
             try {
                 val games = likesService.list()
                 withContext(Dispatchers.Main) {
-<<<<<<< HEAD
-                    if (games.isEmpty()) {
-                        view.findViewById<MaterialTextView>(R.id.empty_likes).visibility = View.VISIBLE
-                        recyclerView.visibility = View.GONE
-                    } else {
-                        recyclerView.adapter = GameCardList(games, true, this@LikesFragment)
-                        recyclerView.scheduleLayoutAnimation()
-                    }
-
-                    progressBar.visibility = View.GONE
-=======
                     recyclerView.adapter = GameCardList(games, R.id.go_to_details, this@LikesFragment)
->>>>>>> 1a435db283ea0829f835bed2f781ab7b16062f23
                 }
             } catch (e: Exception) { Log.e("Game Card Bind:", e.toString()) }
         }
