@@ -1,17 +1,13 @@
 package com.example.androidproject.fragments.home
 
 import android.util.Log
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidproject.R
 import com.example.androidproject.fragments.GameCardList
 import com.example.androidproject.services.SteamCommunityService
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -23,6 +19,7 @@ class Search: Fragment(R.layout.fragment_search) {
         .build()
         .create(SteamCommunityService::class.java)
 
+    @OptIn(DelicateCoroutinesApi::class)
     fun bindSearch(input: String) {
         val recyclerView: RecyclerView = requireView().findViewById(R.id.recycler_view)
         GlobalScope.launch {
