@@ -85,6 +85,10 @@
         <u>price : %s</u>
     </string>
 
+    // Game Details
+
+    <string name="description">Description</string>
+    <string name="reviews">Reviews</string>
     <string name="games_details_title">
         Game details
     </string>

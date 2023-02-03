@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -66,7 +67,8 @@ class GameDetailsFragment: Fragment(R.layout.fragment_game_details) {
     private fun bind(game: Game) {
         requireView().findViewById<TextView>(R.id.title).text = game.title
         requireView().findViewById<TextView>(R.id.studio).text = game.studio
-        requireView().findViewById<TextView>(R.id.description).text = game.shortDescription
+        val description: TextView = requireView().findViewById(R.id.description)
+        description.text = game.shortDescription
 
         GlobalScope.launch {
             val backgroundBitmap = BitmapFactory.decodeStream(withContext(Dispatchers.IO) { game.backgroundUrl.openStream() })
@@ -78,6 +80,22 @@ class GameDetailsFragment: Fragment(R.layout.fragment_game_details) {
                 val card: LinearLayout = requireView().findViewById(R.id.card)
                 card.background = prepareCardBg(card.height, card.width, coverBitmap)
             }
+        }
+
+        val showDescription: Button = requireView().findViewById(R.id.showDescription)
+        val showReviews: Button = requireView().findViewById(R.id.showReviews)
+        showDescription.background = null
+
+        showDescription.setOnClickListener {
+            showReviews.background = ResourcesCompat.getDrawable(resources, R.drawable.switch_right_button_bg,null)
+            showDescription.background = null
+            description.visibility = View.VISIBLE
+        }
+
+        showReviews.setOnClickListener {
+            showDescription.background = ResourcesCompat.getDrawable(resources, R.drawable.switch_left_button_bg,null)
+            showReviews.background = null
+            description.visibility = View.GONE
         }
     }
 
