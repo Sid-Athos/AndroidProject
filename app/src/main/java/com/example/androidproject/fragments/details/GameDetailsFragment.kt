@@ -77,12 +77,14 @@ class GameDetailsFragment: Fragment(R.layout.fragment_game_details) {
                     likesService.remove(gameId)
                     withContext(Dispatchers.Main) {
                         Toast.makeText(requireContext(), getString(R.string.game_details_remove_from_likes), Toast.LENGTH_SHORT).show()
+                        liked = false
                         checkState()
                     }
                 } else {
                     likesService.add(gameId)
                     withContext(Dispatchers.Main) {
                         Toast.makeText(requireContext(), getString(R.string.game_details_add_to_likes), Toast.LENGTH_SHORT).show()
+                        liked = true
                         checkState()
                     }
                 }
@@ -95,12 +97,14 @@ class GameDetailsFragment: Fragment(R.layout.fragment_game_details) {
                     wishlistService.remove(gameId)
                     withContext(Dispatchers.Main) {
                         Toast.makeText(requireContext(), getString(R.string.game_details_remove_from_wishlist), Toast.LENGTH_SHORT).show()
+                        inWishlist = false
                         checkState()
                     }
                 } else {
                     wishlistService.add(gameId)
                     withContext(Dispatchers.Main) {
                         Toast.makeText(requireContext(), getString(R.string.game_details_add_to_wishlist), Toast.LENGTH_SHORT).show()
+                        inWishlist = true
                         checkState()
                     }
                 }
