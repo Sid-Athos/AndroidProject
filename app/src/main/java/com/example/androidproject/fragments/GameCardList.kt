@@ -51,14 +51,18 @@ class GameCardList(private val games: List<String>, private val displayDetails: 
 
         @OptIn(DelicateCoroutinesApi::class)
         fun bind(data: Game, showDetails: Boolean) {
-            GlobalScope.launch {
+            GlobalScope.launch(Dispatchers.IO) {
                 Log.v("game list cover", data.coverUrl.toString())
-                val coverBitmap = BitmapFactory.decodeStream(withContext(Dispatchers.IO) {
-                    data.coverUrl.openStream()
-                })
-                withContext(Dispatchers.Main){
-                    bindCoverToBg(coverBitmap)
-                    cover.setImageBitmap(coverBitmap)
+
+                try {
+                    val coverBitmap = BitmapFactory.decodeStream(data.coverUrl.openStream())
+
+                    withContext(Dispatchers.Main) {
+                        bindCoverToBg(coverBitmap)
+                        cover.setImageBitmap(coverBitmap)
+                    }
+                } catch (e: Exception) {
+                    Log.e("game list cover", e.toString())
                 }
             }
             title.text = data.title
@@ -74,7 +78,7 @@ class GameCardList(private val games: List<String>, private val displayDetails: 
             card.visibility = View.VISIBLE
         }
 
-        fun bindCoverToBg(cover: Bitmap) {
+        private fun bindCoverToBg(cover: Bitmap) {
             val cardRatio = card.width / card.height
             val banner = Bitmap.createBitmap(cover, 0, cover.height/2, cover.width, cover.width/cardRatio)
             val bannerDrawable = RoundedBitmapDrawableFactory.create(itemView.resources, banner)
@@ -97,16 +101,21 @@ class GameCardList(private val games: List<String>, private val displayDetails: 
         val game = (parent.requireActivity() as MainActivity).cache[gameId]
 
         if (game == null) {
-            GlobalScope.launch(Dispatchers.Main) {
+            GlobalScope.launch(Dispatchers.IO) {
                 val data: JsonElement
-                withContext(Dispatchers.IO) {
+                try {
                     data = api.getAppById(gameId).await()
-                }
 
-                if (data.asJsonObject.get(gameId).asJsonObject.get("success").asBoolean) {
-                    val newGame = Game(gameId, data)
-                    (parent.requireActivity() as MainActivity).cache[gameId] = newGame
-                    holder.bind(newGame, displayDetails)
+                    if (data.asJsonObject.get(gameId).asJsonObject.get("success").asBoolean) {
+                        val newGame = Game(gameId, data)
+                        (parent.requireActivity() as MainActivity).cache[gameId] = newGame
+
+                        withContext(Dispatchers.Main) {
+                            holder.bind(newGame, displayDetails)
+                        }
+                    }
+                } catch (e: Exception) {
+                    Log.e("game list", "error getting game data", e)
                 }
             }
         } else holder.bind(game, displayDetails)

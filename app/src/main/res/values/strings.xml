@@ -13,7 +13,9 @@
 
     <string name="fragment_container">Contain main components</string>
 
-    <string name="best_sellers"><u>The best sellers</u></string>
+    <string name="best_sellers">
+        <u>The best sellers</u>
+    </string>
     <string name="search_games">Search Games...</string>
 
     // Login page
@@ -26,7 +28,9 @@
     <string name="login_successful">Login successful!</string>
     <string name="login_failed">Login failed! Please try again later</string>
 
-    <string name="forgot_password"><u>Forgot password</u></string>
+    <string name="forgot_password">
+        <u>Forgot password</u>
+    </string>
 
     // Register page
     <string name="register_title">Registration</string>
@@ -44,7 +48,9 @@
     <string name="forgot_password_button">Resend my password</string>
 
     <string name="forgot_password_successful">An email has been sent to you to reset your password</string>
-    <string name="forgot_password_failed">An error occurred while trying to reset your password. Please try again later</string>
+    <string name="forgot_password_failed">An error occurred while trying to reset your password. Please try again
+        later
+    </string>
 
     <string name="forgot_password_error_user_not_found">This email is not associated with any account.</string>
 
@@ -75,5 +81,9 @@
     // Game card
     <string name="gameCover">Game cover</string>
     <string name="knowMore">Know more</string>
-    <string name="gamePrice"><u>price : %s</u></string>
+    <string name="gamePrice">
+        <u>price : %s</u>
+    </string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

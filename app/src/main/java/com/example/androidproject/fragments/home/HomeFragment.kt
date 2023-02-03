@@ -1,7 +1,6 @@
 package com.example.androidproject.fragments.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.EditText
 import androidx.core.widget.doOnTextChanged
@@ -16,15 +15,26 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         val searchBar: EditText = view.findViewById(R.id.search_bar)
 
-        searchBar.setOnFocusChangeListener { editView, b ->
-            val bestsellerContainer:FragmentContainerView = view.findViewById(R.id.bestseller_container)
-            val searchContainer:FragmentContainerView = view.findViewById(R.id.search_container)
-            val searchFragment = childFragmentManager.findFragmentById(R.id.search_container) as Search
+        val bestsellerContainer:FragmentContainerView = view.findViewById(R.id.bestseller_container)
+        val searchContainer:FragmentContainerView = view.findViewById(R.id.search_container)
+        val searchFragment = childFragmentManager.findFragmentById(R.id.search_container) as Search
 
-            bestsellerContainer.visibility = View.GONE
-            searchContainer.visibility = View.VISIBLE
-            searchBar.onFocusChangeListener = null
-            searchBar.doOnTextChanged { text, start, before, count -> searchFragment.bindSearch(text.toString()) }
+        var displayedSearch = false
+
+        searchBar.doOnTextChanged { text, start, before, count ->
+            run {
+                if (text != null && text.isEmpty()) {
+                    bestsellerContainer.visibility = View.VISIBLE
+                    searchContainer.visibility = View.GONE
+                    displayedSearch = false
+                } else if (!displayedSearch) {
+                    bestsellerContainer.visibility = View.GONE
+                    searchContainer.visibility = View.VISIBLE
+                    displayedSearch = true
+                }
+
+                searchFragment.bindSearch(text.toString())
+            }
         }
     }
 }

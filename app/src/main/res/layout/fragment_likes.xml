@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/primary"
->
-    <Toolbar
-        android:layout_width="0dp"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:elevation="10dp"
-        android:background="@color/primary" android:id="@+id/toolbar2" app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" app:layout_constraintEnd_toEndOf="parent"
-    >
+        android:padding="15dp"
+        android:gravity="center_vertical"
+        android:background="@color/primary" android:id="@+id/toolbar4">
         <ImageView
             android:id="@+id/backButton"
             android:layout_width="wrap_content"
@@ -27,6 +27,14 @@
             android:textColor="@color/white"
             android:textSize="20sp"
             android:fontFamily="@font/google_sans"
-            android:textFontWeight="700"/>
-    </Toolbar>
-</androidx.constraintlayout.widget.ConstraintLayout>
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/likes_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="10dp"
+        android:paddingBottom="10dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+</LinearLayout>
