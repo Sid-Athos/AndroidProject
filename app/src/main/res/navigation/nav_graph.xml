@@ -70,5 +70,7 @@
     <fragment
         android:id="@+id/gameDetailsFragment"
         android:name="com.example.androidproject.fragments.details.GameDetailsFragment"
-        android:label="GameDetailsFragment" />
+        android:label="GameDetailsFragment" >
+        <action android:id="@+id/action_gameDetailsFragment_to_homeFragment" app:destination="@id/homeFragment"/>
+    </fragment>
 </navigation>

@@ -11,13 +11,18 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.androidproject.MainActivity
 import com.example.androidproject.R
 import com.example.androidproject.models.Game
+import com.example.androidproject.services.LikesService
 import com.example.androidproject.services.SteamStoreService
+import com.example.androidproject.services.WishlistService
 import com.google.gson.JsonElement
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.*
@@ -26,6 +31,9 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 class GameDetailsFragment: Fragment(R.layout.fragment_game_details) {
+    private val likesService = LikesService()
+    private val wishlistService = WishlistService()
+
     private val api = Retrofit.Builder()
         .baseUrl("https://store.steampowered.com/")
         .addConverterFactory(GsonConverterFactory.create())
@@ -37,8 +45,39 @@ class GameDetailsFragment: Fragment(R.layout.fragment_game_details) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val returnButton: AppCompatImageView = requireView().findViewById(R.id.backButton)
+        val likeButton: AppCompatImageView = requireView().findViewById(R.id.likesButton)
+        val wishlistButton: AppCompatImageView = requireView().findViewById(R.id.wishlistButton)
+
         val gameId = arguments?.getString("gameId") ?: "10"
         val game = (requireActivity() as MainActivity).cache[gameId]
+
+
+        likeButton.setOnClickListener {
+            GlobalScope.launch(Dispatchers.IO) {
+                likesService.add(gameId)
+
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(requireContext(), "Liked", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        wishlistButton.setOnClickListener {
+            GlobalScope.launch(Dispatchers.IO) {
+                wishlistService.add(gameId)
+
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(requireContext(), "Added to wishlist", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+
+        returnButton.setOnClickListener {
+            val action = GameDetailsFragmentDirections.actionGameDetailsFragmentToHomeFragment()
+            findNavController().navigate(action)
+        }
+
 
         if (game == null) {
             GlobalScope.launch(Dispatchers.IO) {
