@@ -5,12 +5,16 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.LayerDrawable
+import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.example.androidproject.MainActivity
 import com.example.androidproject.R
 import com.example.androidproject.models.Game
@@ -64,6 +68,13 @@ class BannerFragment: Fragment(R.layout.fragment_most_played_banner) {
             }
         }
 
+        requireView().findViewById<Button>(R.id.button).setOnClickListener {
+            Log.v("banner button go", "gogo")
+            val bundle = Bundle()
+            bundle.putString("gameId", game.id)
+            val navController = requireView().findNavController()
+            navController.navigate(R.id.go_to_details2, bundle)
+        }
     }
 
     @SuppressLint("UseCompatLoadingForDrawables")
