@@ -21,7 +21,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         var displayedSearch = false
 
-        searchBar.doOnTextChanged { text, start, before, count ->
+        searchBar.doOnTextChanged { text, _, _, _ ->
             run {
                 if (text != null && text.isEmpty()) {
                     bestsellerContainer.visibility = View.VISIBLE

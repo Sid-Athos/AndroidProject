@@ -1,4 +1,4 @@
-package com.example.androidproject
+package com.example.androidproject.fragments
 
 import android.os.Bundle
 import android.util.Log
@@ -10,7 +10,7 @@ import android.widget.ImageView
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.androidproject.fragments.GameCardList
+import com.example.androidproject.R
 import com.example.androidproject.services.WishlistService
 import kotlinx.coroutines.*
 
