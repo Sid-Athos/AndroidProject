@@ -39,6 +39,7 @@ class LikesFragment: Fragment() {
                         recyclerView.visibility = View.GONE
                     } else {
                         recyclerView.adapter = GameCardList(games, true, this@LikesFragment)
+                        recyclerView.scheduleLayoutAnimation()
                     }
 
                     progressBar.visibility = View.GONE

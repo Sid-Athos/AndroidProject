@@ -63,6 +63,7 @@
             android:layout_height="match_parent"
             android:paddingHorizontal="10dp"
             android:paddingBottom="10dp"
+            android:layoutAnimation="@anim/layout_animation"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         />
     </LinearLayout>

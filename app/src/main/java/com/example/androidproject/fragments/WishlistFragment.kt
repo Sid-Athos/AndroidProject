@@ -38,6 +38,7 @@ class WishlistFragment : Fragment() {
                         recyclerView.visibility = View.GONE
                     } else {
                         recyclerView.adapter = GameCardList(games, true, this@WishlistFragment)
+                        recyclerView.scheduleLayoutAnimation()
                     }
 
                     progressBar.visibility = View.GONE

@@ -31,6 +31,7 @@ class Search: Fragment(R.layout.fragment_search) {
             Log.v("home fragment input", games.toString())
             withContext(Dispatchers.Main) {
                 recyclerView.adapter = GameCardList(games, true, this@Search)
+                recyclerView.scheduleLayoutAnimation()
             }
         }
     }
