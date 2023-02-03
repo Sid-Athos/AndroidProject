@@ -43,9 +43,9 @@
             android:layout_gravity="center_vertical"
             android:textColor="@color/white"
             android:textSize="17sp"
-            android:fontFamily="@font/google_sans"
+            android:fontFamily="@font/proxima_nova_regular"
             android:drawablePadding="45dp"
-            app:drawableTopCompat="@drawable/empty_whishlist"
+            app:drawableTopCompat="@drawable/empty_likes"
             android:visibility="gone"
         />
 

@@ -28,7 +28,6 @@ class LikesFragment: Fragment() {
         initBackButton(view)
 
         val recyclerView: RecyclerView = view.findViewById(R.id.likes_list_view)
-
         val progressBar = view.findViewById<ProgressBar>(R.id.likes_progress_bar)
 
         GlobalScope.launch(Dispatchers.IO) {

@@ -18,6 +18,10 @@
     </string>
     <string name="search_games">Search Games…</string>
 
+    <string name="empty_wishes">
+        You have no likes yet. You can add games to your likes by clicking on the heart icon on the game page.
+    </string>
+
     <string name="empty_likes">
         You have no likes yet. You can add games to your likes by clicking on the heart icon on the game page.
     </string>
