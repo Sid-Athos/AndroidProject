@@ -132,6 +132,7 @@ class RegisterFragment : Fragment() {
                 Toast.makeText(context, getString(R.string.register_successful), Toast.LENGTH_LONG).show()
 
                 val action: NavDirections = RegisterFragmentDirections.actionRegisterFragmentToHomeFragment()
+                getSupportFragmentManager()
                 findNavController().navigate(action)
             } catch (e: FirebaseAuthException) {
                 Log.d("Register", "Error: ${e.errorCode} - ${e.message}")

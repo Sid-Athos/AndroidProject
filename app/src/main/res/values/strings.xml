@@ -75,4 +75,5 @@
     <string name="gameCover">Game cover</string>
     <string name="knowMore">Know more</string>
     <string name="gamePrice"><u>price : %s</u></string>
+    <string name="game_note" />
 </resources>

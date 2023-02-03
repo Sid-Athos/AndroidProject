@@ -9,6 +9,7 @@ import android.graphics.ColorFilter
 import android.graphics.Shader
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.LayerDrawable
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -101,6 +102,8 @@ class GameCardList(private val games: List<String>, private val displayDetails: 
         val game = (parent.requireActivity() as MainActivity).cache[gameId]
 
         if (game == null) {
+            val bundle = Bundle()
+            bundle.putString("gameDetails")
             GlobalScope.launch(Dispatchers.Main) {
                 val data: JsonElement
                 val imageBitmap: Bitmap

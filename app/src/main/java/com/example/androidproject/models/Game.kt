@@ -3,7 +3,7 @@ package com.example.androidproject.models
 import android.graphics.Bitmap
 import com.google.gson.JsonElement
 
-data class Game(val id:String, val title:String, val studio:String, val price:String, val cover: Bitmap ) {
+ open class Game(open val id:String, val title:String, val studio:String, val price:String, open val cover: Bitmap ) {
     constructor(id:String, json: JsonElement, cover: Bitmap):
             this(id,
                 json.asJsonObject.get(id).asJsonObject.get("data").asJsonObject.get("name").asString,
@@ -12,4 +12,5 @@ data class Game(val id:String, val title:String, val studio:String, val price:St
                 else if (!json.asJsonObject.get(id).asJsonObject.get("data").asJsonObject.has("price_overview")) "free"
                 else json.asJsonObject.get(id).asJsonObject.get("data").asJsonObject.get("price_overview").asJsonObject.get("final_formatted").asString,
                 cover)
+
 }

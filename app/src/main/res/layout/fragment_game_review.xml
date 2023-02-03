@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/game_review"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clipToPadding="true"
+    android:baselineAligned="false">
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_marginStart="10dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_vertical">
+        <ImageView
+            android:id="@+id/game_logo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:contentDescription="@string/gameCover" />
+        <ImageView
+            android:id="@+id/game_review_author"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:contentDescription="@string/game_note" />
+        <TextView
+            android:id="@+id/game_review_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="@color/white"/>
+        <TextView
+            android:id="@+id/game_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:layout_marginTop="14dp"
+            android:visibility="gone"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/game_details"
+        android:layout_width="100dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/more_button_bg"
+        android:gravity="center"
+        android:paddingHorizontal="10dp"
+        android:layout_marginStart="10dp"
+        android:visibility="gone">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/knowMore"
+            android:fontFamily="@font/proxima_nova_regular"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:textColor="@color/white"/>
+    </LinearLayout>
+</LinearLayout>
