@@ -3,6 +3,7 @@ package com.example.androidproject.fragments
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.drawable.LayerDrawable
+import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -68,8 +69,10 @@ class GameCardList(private val games: List<String>, private val detailsActionId:
             studio.text = data.studio
             price.text = itemView.resources.getString(R.string.gamePrice, data.price)
             detailsButton.setOnClickListener {
+                val bundle = Bundle()
+                bundle.putString("gameId", data.id)
                 val navController = parent.findNavController()
-                navController.navigate(detailsActionId)
+                navController.navigate(detailsActionId, bundle)
             }
 
             card.visibility = View.VISIBLE
