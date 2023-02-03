@@ -39,8 +39,7 @@ class MostPlayedFragment: Fragment(R.layout.fragment_most_played) {
                     .get("ranks").asJsonArray
                     .take(30)
                     .map { rank -> rank.asJsonObject.get("appid").toString() }
-                recyclerView.adapter = GameCardList(games, true, this@MostPlayedFragment)
-                recyclerView.scheduleLayoutAnimation()
+                recyclerView.adapter = GameCardList(games, R.id.go_to_details2, this@MostPlayedFragment)
                 banner.bind(games[0])
             } catch (e: Exception) { Log.e("Game Card Bind:", e.toString()) }
         }

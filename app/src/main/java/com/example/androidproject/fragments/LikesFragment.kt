@@ -34,6 +34,7 @@ class LikesFragment: Fragment() {
             try {
                 val games = likesService.list()
                 withContext(Dispatchers.Main) {
+<<<<<<< HEAD
                     if (games.isEmpty()) {
                         view.findViewById<MaterialTextView>(R.id.empty_likes).visibility = View.VISIBLE
                         recyclerView.visibility = View.GONE
@@ -43,6 +44,9 @@ class LikesFragment: Fragment() {
                     }
 
                     progressBar.visibility = View.GONE
+=======
+                    recyclerView.adapter = GameCardList(games, R.id.go_to_details, this@LikesFragment)
+>>>>>>> 1a435db283ea0829f835bed2f781ab7b16062f23
                 }
             } catch (e: Exception) { Log.e("Game Card Bind:", e.toString()) }
         }

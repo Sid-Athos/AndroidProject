@@ -82,4 +82,26 @@
     <string name="knowMore">En savoir plus</string>
     <string name="gamePrice"><u>prix : %s</u></string>
 
+    // Game Details
+
+    <string name="description">Description</string>
+    <string name="reviews">Avis</string>
+    <string name="games_details_title">
+        Détails du jeu
+    </string>
+
+    <string name="game_details_add_to_wishlist">
+        Ajouté à la liste de souhaits
+    </string>
+
+    <string name="game_details_remove_from_wishlist">
+        Supprimé de la liste de souhaits
+    </string>
+
+    <string name="game_details_add_to_likes">
+        Ajouté au favoris
+    </string>
+    <string name="game_details_remove_from_likes">
+        Supprimé des favoris
+    </string>
 </resources>

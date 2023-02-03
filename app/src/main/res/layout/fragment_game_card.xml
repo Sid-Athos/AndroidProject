@@ -39,8 +39,7 @@
             android:layout_height="wrap_content"
             android:textSize="12sp"
             android:textColor="@color/white"
-            android:layout_marginTop="14dp"
-            android:visibility="gone"/>
+            android:layout_marginTop="14dp"/>
     </LinearLayout>
 
     <LinearLayout
@@ -50,8 +49,7 @@
         android:background="@drawable/more_button_bg"
         android:gravity="center"
         android:paddingHorizontal="10dp"
-        android:layout_marginStart="10dp"
-        android:visibility="gone">
+        android:layout_marginStart="10dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

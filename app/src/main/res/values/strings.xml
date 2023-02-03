@@ -92,6 +92,18 @@
     <string name="gamePrice">
         <u>price : %s</u>
     </string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    // Game Details
+
+    <string name="description">Description</string>
+    <string name="reviews">Reviews</string>
+    <string name="games_details_title">
+        Game details
+    </string>
+
+    <string name="game_details_add_to_wishlist">Add to wishlist</string>
+    <string name="game_details_remove_from_wishlist">Remove from wishlist</string>
+
+    <string name="game_details_add_to_likes">Add to likes</string>
+    <string name="game_details_remove_from_likes">Remove from likes</string>
 </resources>

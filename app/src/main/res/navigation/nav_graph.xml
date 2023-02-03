@@ -47,15 +47,30 @@
                 app:enterAnim="@anim/nav_default_enter_anim" app:exitAnim="@anim/nav_default_exit_anim"
                 app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
         <action android:id="@+id/action_homeFragment_to_wishlistFragment" app:destination="@id/wishlistFragment"/>
+        <action
+            android:id="@+id/go_to_details2"
+            app:destination="@id/gameDetailsFragment" />
     </fragment>
     <fragment tools:layout="@layout/fragment_likes" android:id="@+id/likesFragment" android:name="com.example.androidproject.fragments.LikesFragment"
               android:label="LikesFragment">
         <action android:id="@+id/action_likesFragment_to_homeFragment" app:destination="@id/homeFragment"
                 app:enterAnim="@anim/nav_default_enter_anim" app:exitAnim="@anim/nav_default_exit_anim"
                 app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        <action
+            android:id="@+id/go_to_details"
+            app:destination="@id/gameDetailsFragment" />
     </fragment>
     <fragment android:id="@+id/wishlistFragment" android:name="com.example.androidproject.fragments.WishlistFragment"
               android:label="fragment_wishlist2" tools:layout="@layout/fragment_wishlist">
         <action android:id="@+id/action_wishlistFragment_to_homeFragment" app:destination="@id/homeFragment"/>
+        <action
+            android:id="@+id/go_to_details3"
+            app:destination="@id/gameDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/gameDetailsFragment"
+        android:name="com.example.androidproject.fragments.details.GameDetailsFragment"
+        android:label="GameDetailsFragment" >
+        <action android:id="@+id/action_gameDetailsFragment_to_homeFragment" app:destination="@id/homeFragment"/>
     </fragment>
 </navigation>
