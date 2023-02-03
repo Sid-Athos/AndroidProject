@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
+import android.text.Html
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -15,6 +16,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory
+import androidx.core.text.HtmlCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.androidproject.MainActivity
@@ -155,7 +157,7 @@ class GameDetailsFragment: Fragment(R.layout.fragment_game_details) {
         requireView().findViewById<TextView>(R.id.title).text = game.title
         requireView().findViewById<TextView>(R.id.studio).text = game.studio
         val description: TextView = requireView().findViewById(R.id.description)
-        description.text = game.shortDescription
+        description.text = Html.fromHtml(game.description)
 
         GlobalScope.launch {
             val backgroundBitmap = BitmapFactory.decodeStream(withContext(Dispatchers.IO) { game.backgroundUrl.openStream() })
