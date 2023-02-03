@@ -11,7 +11,6 @@ import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.example.androidproject.R
 import com.example.androidproject.services.AuthService
-import com.example.androidproject.services.LikesService
 import com.example.androidproject.utils.AuthUtils
 import com.example.androidproject.utils.FormsUtils
 import com.google.firebase.FirebaseTooManyRequestsException
@@ -57,7 +56,9 @@ class WelcomeFragment : Fragment() {
 
     private fun initRegisterButtonBehavior() {
         registerButton.setOnClickListener{
-            val action: NavDirections = WelcomeFragmentDirections.actionWelcomeFragmentToRegisterFragment()
+            val action: NavDirections = WelcomeFragmentDirections.actionWelcomeFragmentToRegisterFragment(
+                emailTV.text.toString()
+            )
             findNavController().navigate(action)
         }
     }
@@ -73,7 +74,9 @@ class WelcomeFragment : Fragment() {
 
     private fun initForgotPasswordBehavior() {
         forgotPassword.setOnClickListener {
-            val action: NavDirections = WelcomeFragmentDirections.actionWelcomeFragmentToForgotPasswordFragment()
+            val action: NavDirections = WelcomeFragmentDirections.actionWelcomeFragmentToForgotPasswordFragment(
+                emailTV.text.toString()
+            )
             findNavController().navigate(action)
         }
     }

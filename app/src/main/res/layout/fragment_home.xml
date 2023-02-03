@@ -1,33 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:background="@color/primary">
-    <ScrollView
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
-        <LinearLayout
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+        <EditText
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="@string/best_sellers"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:fontFamily="@font/proxima_nova_regular"/>
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/game_list_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="10dp"
-                android:paddingBottom="10dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            android:background="@drawable/search_bg"
+            android:hint="@string/search_games"
+            android:textSize="19sp"
+            android:fontFamily="@font/proxima_nova_regular"
+            android:minHeight="50dp"
+            android:paddingStart="13dp"
+            android:paddingEnd="42dp"
+            android:textColorHint="@color/gray"
+            android:textColor="@color/white"
+            android:inputType="text" />
 
-        </LinearLayout>
-    </ScrollView>
+        <ImageView
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/loupe"
+            android:layout_marginRight="13dp"
+            android:layout_marginTop="15dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:name="com.example.androidproject.fragments.home.mostplayed.MostPlayedFragment"
+        tools:layout="@layout/fragment_most_played" />
 </LinearLayout>

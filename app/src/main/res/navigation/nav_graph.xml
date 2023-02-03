@@ -11,6 +11,7 @@
         <action android:id="@+id/action_registerFragment_to_homeFragment" app:destination="@id/homeFragment"
                 app:enterAnim="@anim/nav_default_enter_anim" app:exitAnim="@anim/nav_default_exit_anim"
                 app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        <argument android:name="email" app:argType="string"/>
     </fragment>
     <fragment
         android:id="@+id/welcomeFragment"
@@ -38,6 +39,7 @@
                 app:destination="@id/welcomeFragment" app:enterAnim="@anim/nav_default_enter_anim"
                 app:exitAnim="@anim/nav_default_exit_anim" app:popEnterAnim="@anim/nav_default_pop_enter_anim"
                 app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+        <argument android:name="email" app:argType="string"/>
     </fragment>
     <fragment android:id="@+id/homeFragment" tools:layout="@layout/fragment_home" android:name="com.example.androidproject.fragments.home.HomeFragment"
               android:label="HomeFragment">
@@ -59,5 +61,16 @@
         <action android:id="@+id/action_wishlistFragment_to_homeFragment" app:destination="@id/homeFragment"
                 app:enterAnim="@anim/nav_default_enter_anim" app:exitAnim="@anim/nav_default_exit_anim"
                 app:popEnterAnim="@anim/nav_default_pop_enter_anim" app:popExitAnim="@anim/nav_default_pop_exit_anim"/>
+    </fragment>
+    <fragment tools:layout="@layout/fragment_game_details" android:id="@+id/gameDetailsFragment" android:name="com.example.androidproject.fragments.gamedetails.GameDetailsFragment"
+        android:label="GameDetailsFragment">
+        <argument
+            android:name="gameId"
+            app:argType="string" />
+        <argument
+            android:name="gameDetails"
+            app:argType="string" />
+        <argument android:name="gameCover" />
+        <argument android:name="gameBackground" />
     </fragment>
 </navigation>

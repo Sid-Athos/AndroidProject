@@ -1,4 +1,4 @@
-package com.example.androidproject.fragments.models
+package com.example.androidproject.models
 
 class Wishlist(var userId: String, var whishlist: List<String>) {
     constructor() : this("", listOf())

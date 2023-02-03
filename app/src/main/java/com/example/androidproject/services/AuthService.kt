@@ -4,8 +4,10 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.tasks.await
 import com.google.firebase.auth.UserProfileChangeRequest
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
-class AuthService() {
+class AuthService {
     private val mAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
     init {
@@ -20,19 +22,28 @@ class AuthService() {
 
     fun getUid() = mAuth.currentUser?.uid
 
-    suspend fun login(email: String, password: String): AuthResult = mAuth.signInWithEmailAndPassword(email, password).await()
+    suspend fun login(email: String, password: String) {
+        return withContext(Dispatchers.IO) {
+            mAuth.signInWithEmailAndPassword(email, password).await()
+        }
+    }
 
-    suspend fun register(email: String, password: String, username: String): AuthResult =
-        run {
+    suspend fun register(email: String, password: String, username: String): AuthResult? {
+        return withContext(Dispatchers.IO) {
             val res = mAuth.createUserWithEmailAndPassword(email, password).await()
             mAuth.currentUser?.updateProfile(
                 UserProfileChangeRequest.Builder()
                     .setDisplayName(username)
                     .build()
             )?.await()
-            
-            return@run res
-        }
 
-    suspend fun resetPassword(email: String) = mAuth.sendPasswordResetEmail(email).await()
+            return@withContext res
+        }
+    }
+
+    suspend fun resetPassword(email: String): Void? {
+        return withContext(Dispatchers.IO) {
+            mAuth.sendPasswordResetEmail(email).await()
+        }
+    }
 }
